@@ -9,7 +9,7 @@ public class MainMenuEvents : MonoBehaviour
 
     private Button _button;
 
-    private List<Button>
+    private List<Button> _menuButtons = new List<Button>();
 
     private void Awake()
     {
@@ -17,15 +17,31 @@ public class MainMenuEvents : MonoBehaviour
 
         _button = _document.rootVisualElement.Q("PlayButton") as Button;
         _button.RegisterCallback<ClickEvent>(OnPlayGameClick);
+
+        _menuButtons = _document.rootVisualElement.Query<Button>().ToList();
+        for (int i = 0; i < _menuButtons.Count; i++)
+        {
+            _menuButtons[i].RegisterCallback<ClickEvent>(OnAllButtonsClick);
+        }
     }
 
     private void OnDisable()
     {
         _button.UnregisterCallback<ClickEvent>(OnPlayGameClick);
+
+        for (int i = 0; i < _menuButtons.Count; i++)
+        {
+            _menuButtons[i].UnregisterCallback<ClickEvent>(OnAllButtonsClick);
+        }
     }
 
     private void OnPlayGameClick(ClickEvent evt)
     {
         Debug.Log("You pressed the Play Button");
+    }
+
+    private void OnAllButtonsClick(ClickEvent evt)
+    {
+
     }
 }
