@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -6,6 +8,8 @@ public class MainMenuEvents : MonoBehaviour
     private UIDocument _document;
 
     private Button _button;
+
+    private List<Button>
 
     private void Awake()
     {
