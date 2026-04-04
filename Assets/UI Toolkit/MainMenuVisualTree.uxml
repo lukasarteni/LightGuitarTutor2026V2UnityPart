@@ -1,9 +1,107 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=a866c7347499dd849bee28454094ed87&amp;type=3#MainMenuStyle"/>
-    <ui:VisualElement name="Container" style="flex-grow: 1;">
-        <ui:Label text="LIGHT&#10;GUITAR&#10;Tutor" name="MainMenuHeader" class="header" style="color: rgb(255, 255, 255); font-size: 40px; align-self: center; align-items: auto; -unity-text-align: upper-center;"/>
-        <ui:Button text="Play" name="PlayButton" class="button" style="-unity-font-style: normal; font-size: 20px; width: 220px; height: 60px; align-self: center; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;"/>
-        <ui:Button text="Settings" name="SettingsButton" class="button"/>
-        <ui:Button text="Exit" name="ExitButton" class="button"/>
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ui="UnityEngine.UIElements"
+         noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
+         editor-extension-mode="False">
+
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=a866c7347499dd849bee28454094ed87&amp;type=3#MainMenuStyle" />
+
+    <!-- =============================== -->
+    <!-- MAIN MENU SCREEN                -->
+    <!-- =============================== -->
+    <ui:VisualElement name="main-menu-screen" class="screen">
+        <ui:VisualElement class="screen-content center-content">
+            <ui:Label text="LIGHT&#10;GUITAR&#10;Tutor" name="game-title" class="game-title" />
+            <ui:VisualElement class="button-group">
+                <ui:Button text="Play" name="play-button" class="menu-button primary-button" />
+                <ui:Button text="Options" name="options-button" class="menu-button" />
+                <ui:Button text="Exit" name="exit-button" class="menu-button danger-button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:VisualElement>
+
+    <!-- =============================== -->
+    <!-- MODE SELECT SCREEN              -->
+    <!-- =============================== -->
+    <ui:VisualElement name="mode-select-screen" class="screen">
+        <ui:VisualElement class="screen-content">
+            <ui:Label text="SELECT MODE" class="screen-title" />
+            <ui:VisualElement class="poster-grid">
+                <ui:Button name="mode-tutorial" class="poster-card">
+                    <ui:VisualElement class="poster-icon-area tutorial-color" />
+                    <ui:Label text="Tutorial" class="poster-label" />
+                    <ui:Label text="Learn the basics" class="poster-desc" />
+                </ui:Button>
+                <ui:Button name="mode-slow" class="poster-card">
+                    <ui:VisualElement class="poster-icon-area slow-color" />
+                    <ui:Label text="Slow &amp; Steady" class="poster-label" />
+                    <ui:Label text="Practice at your pace" class="poster-desc" />
+                </ui:Button>
+                <ui:Button name="mode-live" class="poster-card">
+                    <ui:VisualElement class="poster-icon-area live-color" />
+                    <ui:Label text="LIVE" class="poster-label" />
+                    <ui:Label text="Play in real time" class="poster-desc" />
+                </ui:Button>
+                <ui:Button name="mode-scales" class="poster-card">
+                    <ui:VisualElement class="poster-icon-area scales-color" />
+                    <ui:Label text="Scales" class="poster-label" />
+                    <ui:Label text="Master your scales" class="poster-desc" />
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:Button text="Back" name="mode-back-button" class="menu-button back-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+
+    <!-- =============================== -->
+    <!-- SONG SELECT SCREEN              -->
+    <!-- =============================== -->
+    <ui:VisualElement name="song-select-screen" class="screen">
+        <ui:VisualElement class="screen-content">
+            <ui:VisualElement class="song-header-row">
+                <ui:Label text="SELECT SONG" class="screen-title" />
+                <ui:Label text="Tutorial" name="mode-badge" class="mode-badge" />
+            </ui:VisualElement>
+            <ui:ListView name="song-list" class="song-list" />
+            <ui:VisualElement class="song-footer-row">
+                <ui:Button text="Back" name="song-back-button" class="menu-button back-button" />
+                <ui:Button text="Confirm" name="confirm-button" class="menu-button primary-button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+
+    <!-- =============================== -->
+    <!-- OPTIONS SCREEN                  -->
+    <!-- =============================== -->
+    <ui:VisualElement name="options-screen" class="screen">
+        <ui:VisualElement class="screen-content options-content">
+            <ui:Label text="OPTIONS" class="screen-title" />
+
+            <ui:VisualElement class="option-row">
+                <ui:Label text="Master Volume" class="option-label" />
+                <ui:Slider name="master-volume" low-value="0" high-value="100" value="80" class="option-slider" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="option-row">
+                <ui:Label text="Music Volume" class="option-label" />
+                <ui:Slider name="music-volume" low-value="0" high-value="100" value="80" class="option-slider" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="option-row">
+                <ui:Label text="SFX Volume" class="option-label" />
+                <ui:Slider name="sfx-volume" low-value="0" high-value="100" value="80" class="option-slider" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="option-row">
+                <ui:Label text="Fullscreen" class="option-label" />
+                <ui:Toggle name="fullscreen-toggle" value="true" class="option-toggle" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="option-row">
+                <ui:Label text="Resolution" class="option-label" />
+                <ui:DropdownField name="resolution-dropdown" class="option-dropdown" />
+            </ui:VisualElement>
+
+            <ui:Button text="Back" name="options-back-button" class="menu-button back-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+
 </ui:UXML>

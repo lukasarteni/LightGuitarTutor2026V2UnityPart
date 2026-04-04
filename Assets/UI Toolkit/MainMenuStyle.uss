@@ -1,18 +1,355 @@
-.header {
+/* ===================================================
+   LIGHT GUITAR TUTOR — Main Menu USS
+   Dark game UI aesthetic
+   =================================================== */
+
+/* ---- ROOT / SCREENS ---- */
+.screen {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(18, 18, 24, 1);
 }
 
-.button {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    width: 220px;
-    height: 60px;
-    align-self: center;
-    font-size: 20px;
-    margin-top: 48px;
-    margin-right: 48px;
+.screen-content {
+    flex-grow: 1;
+    padding: 40px 60px;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-content {
+    justify-content: center;
+    align-items: center;
+}
+
+/* ---- TYPOGRAPHY ---- */
+.game-title {
+    color: rgb(255, 255, 255);
+    font-size: 64px;
+    -unity-text-align: upper-center;
+    -unity-font-style: bold;
+    letter-spacing: 6px;
     margin-bottom: 48px;
-    margin-left: 48px;
-    color: rgb(0, 0, 0);
+}
+
+.screen-title {
+    color: rgb(220, 220, 230);
+    font-size: 36px;
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    margin-bottom: 32px;
+    letter-spacing: 4px;
+}
+
+/* ---- BUTTONS (SHARED) ---- */
+.menu-button {
+    width: 260px;
+    height: 56px;
+    font-size: 20px;
+    -unity-font-style: bold;
+    border-radius: 12px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.12);
+    background-color: rgba(40, 40, 56, 1);
+    color: rgb(210, 210, 220);
+    margin: 8px 0;
+    transition-duration: 0.15s;
+}
+
+.menu-button:hover {
+    background-color: rgba(60, 60, 80, 1);
+    border-color: rgba(255, 255, 255, 0.3);
+    scale: 1.04;
+}
+
+.menu-button:active {
+    background-color: rgba(30, 30, 46, 1);
+    scale: 0.97;
+}
+
+.primary-button {
+    background-color: rgba(56, 120, 255, 1);
+    border-color: rgba(100, 160, 255, 0.4);
+    color: rgb(255, 255, 255);
+}
+
+.primary-button:hover {
+    background-color: rgba(80, 140, 255, 1);
+    border-color: rgba(130, 180, 255, 0.6);
+}
+
+.danger-button {
+    background-color: rgba(180, 50, 50, 0.85);
+    border-color: rgba(220, 80, 80, 0.4);
+    color: rgb(255, 220, 220);
+}
+
+.danger-button:hover {
+    background-color: rgba(210, 60, 60, 1);
+}
+
+.back-button {
+    width: 180px;
+    height: 48px;
+    font-size: 18px;
+    margin-top: 24px;
+    background-color: rgba(50, 50, 66, 1);
+}
+
+.button-group {
+    align-items: center;
+}
+
+/* ===================================================
+   MODE SELECT — POSTER CARDS
+   =================================================== */
+.poster-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+    margin-bottom: 24px;
+}
+
+.poster-card {
+    width: 220px;
+    height: 280px;
+    margin: 12px;
+    border-radius: 16px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(30, 30, 44, 1);
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    overflow: hidden;
+    transition-duration: 0.18s;
+}
+
+.poster-card:hover {
+    scale: 1.06;
+    border-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(38, 38, 56, 1);
+}
+
+.poster-card:active {
+    scale: 0.96;
+}
+
+.poster-icon-area {
+    width: 100%;
+    height: 140px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+.tutorial-color {
+    background-color: rgba(72, 190, 120, 0.85);
+}
+
+.slow-color {
+    background-color: rgba(80, 160, 240, 0.85);
+}
+
+.live-color {
+    background-color: rgba(240, 80, 80, 0.85);
+}
+
+.scales-color {
+    background-color: rgba(200, 160, 60, 0.85);
+}
+
+.poster-label {
+    color: rgb(240, 240, 245);
+    font-size: 22px;
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    margin-top: 18px;
+}
+
+.poster-desc {
+    color: rgba(180, 180, 200, 0.8);
+    font-size: 14px;
+    -unity-text-align: upper-center;
+    margin-top: 6px;
+}
+
+/* ===================================================
+   SONG SELECT
+   =================================================== */
+.song-header-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.song-header-row .screen-title {
+    margin-bottom: 0;
+    margin-right: 16px;
+}
+
+.mode-badge {
+    font-size: 16px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+    background-color: rgba(56, 120, 255, 0.9);
+    border-radius: 8px;
+    padding: 4px 16px;
+    height: 30px;
+    -unity-text-align: middle-center;
+}
+
+.song-list {
+    flex-grow: 1;
+    width: 700px;
+    max-height: 480px;
+    background-color: rgba(24, 24, 36, 1);
+    border-radius: 12px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.06);
+    margin-top: 8px;
+    margin-bottom: 16px;
+    padding: 8px;
+}
+
+/* Song row item (built at runtime) */
+.song-row {
+    flex-direction: row;
+    align-items: center;
+    height: 56px;
+    padding: 0 16px;
+    margin: 4px 0;
+    border-radius: 8px;
+    background-color: rgba(36, 36, 52, 1);
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.04);
+    transition-duration: 0.12s;
+}
+
+.song-row:hover {
+    background-color: rgba(50, 50, 72, 1);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.song-row-selected {
+    background-color: rgba(56, 120, 255, 0.25);
+    border-color: rgba(56, 120, 255, 0.6);
+}
+
+.song-name {
+    flex-grow: 1;
+    color: rgb(230, 230, 240);
+    font-size: 18px;
+    -unity-font-style: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-artist {
+    width: 160px;
+    color: rgba(170, 170, 190, 0.9);
+    font-size: 15px;
+    -unity-text-align: upper-center;
+}
+
+.song-duration {
+    width: 70px;
+    color: rgba(150, 150, 170, 0.8);
+    font-size: 14px;
+    -unity-text-align: upper-center;
+}
+
+.difficulty-badge {
+    min-width: 60px;
+    height: 24px;
+    border-radius: 6px;
+    font-size: 13px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    color: rgb(255, 255, 255);
+    padding: 0 10px;
+    margin-left: 8px;
+}
+
+.difficulty-easy {
+    background-color: rgba(72, 190, 120, 0.9);
+}
+
+.difficulty-medium {
+    background-color: rgba(220, 170, 40, 0.9);
+}
+
+.difficulty-hard {
+    background-color: rgba(220, 60, 60, 0.9);
+}
+
+.song-footer-row {
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.song-footer-row .menu-button {
+    margin: 0 12px;
+}
+
+/* ===================================================
+   OPTIONS SCREEN
+   =================================================== */
+.options-content {
+    align-items: center;
+    max-width: 600px;
+    align-self: center;
+}
+
+.option-row {
+    flex-direction: row;
+    align-items: center;
+    width: 520px;
+    margin: 10px 0;
+}
+
+.option-label {
+    width: 180px;
+    color: rgb(200, 200, 215);
+    font-size: 18px;
+    -unity-font-style: bold;
+}
+
+.option-slider {
+    flex-grow: 1;
+}
+
+.option-slider .unity-base-slider__dragger {
+    background-color: rgba(56, 120, 255, 1);
+    border-radius: 6px;
+    width: 18px;
+    height: 18px;
+}
+
+.option-slider .unity-base-slider__tracker {
+    background-color: rgba(60, 60, 80, 1);
+    border-radius: 4px;
+    height: 6px;
+}
+
+.option-toggle {
+    margin-left: 4px;
+}
+
+.option-dropdown {
+    flex-grow: 1;
+    background-color: rgba(36, 36, 52, 1);
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgb(210, 210, 220);
+    font-size: 16px;
+    height: 36px;
 }

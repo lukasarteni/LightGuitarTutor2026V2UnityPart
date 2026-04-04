@@ -288,7 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
   m_PanelSettings: {fileID: 11400000, guid: d96b1c289df92ed48862453b73f3b956, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 4d145693b4310964d91ecb084da65412, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: ba521e7d9e2e10f4e85ad8e9181bd480, type: 3}
   m_SortingOrder: 0
   m_Position: 0
   m_WorldSpaceSizeMode: 1
@@ -321,9 +321,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1068244935}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 090692b60830988449933e34a4a5a9f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 1001e5c099aeb8b498de2a2e093c69ed, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MainMenuEvent
+  m_EditorClassIdentifier: Assembly-CSharp::MenuManager
+  songs: []
 --- !u!1 &1861370370
 GameObject:
   m_ObjectHideFlags: 0
