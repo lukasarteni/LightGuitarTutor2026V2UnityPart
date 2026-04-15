@@ -7,7 +7,7 @@ public class TimeNoteSpawner : MonoBehaviour
 
     public LaneManager laneManager;
 
-    public TestChartGenerator chartGenerator;
+    public ChartGeneratorFromTxt chartGenerator;
 
     public float spawnAheadTime = 10f;
 
