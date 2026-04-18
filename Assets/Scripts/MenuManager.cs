@@ -13,7 +13,12 @@ public class MenuManager : MonoBehaviour
     private VisualElement _mainMenuScreen;
     private VisualElement _modeSelectScreen;
     private VisualElement _songSelectScreen;
+    private VisualElement _infoScreen;
     private VisualElement _optionsScreen;
+
+    // Info-screen helpers
+    private Label _infoTitle;
+    private Label _infoText;
 
     // Song-select helpers
     private ListView _songListView;
@@ -46,11 +51,13 @@ public class MenuManager : MonoBehaviour
         _mainMenuScreen = _root.Q<VisualElement>("main-menu-screen");
         _modeSelectScreen = _root.Q<VisualElement>("mode-select-screen");
         _songSelectScreen = _root.Q<VisualElement>("song-select-screen");
+        _infoScreen = _root.Q<VisualElement>("info-screen");
         _optionsScreen = _root.Q<VisualElement>("options-screen");
 
         _allPanels.Add(_mainMenuScreen);
         _allPanels.Add(_modeSelectScreen);
         _allPanels.Add(_songSelectScreen);
+        _allPanels.Add(_infoScreen);
         _allPanels.Add(_optionsScreen);
 
         // Start with only main menu visible
@@ -59,6 +66,7 @@ public class MenuManager : MonoBehaviour
         WireMainMenuButtons();
         WireModeSelectButtons();
         WireSongSelectScreen();
+        WireInfoScreen();
         WireOptionsScreen();
     }
 
@@ -104,10 +112,52 @@ public class MenuManager : MonoBehaviour
     private void SelectMode(GameMode mode)
     {
         GameManager.Instance.SetMode(mode);
-        RefreshSongSelectHeader();
-        _selectedSongIndex = -1;
-        _songListView.ClearSelection();
-        ShowPanel(_songSelectScreen);
+
+        if (mode == GameMode.Tutorial || mode == GameMode.Scales)
+        {
+            ShowInfoScreen(mode);
+        }
+        else
+        {
+            RefreshSongSelectHeader();
+            _selectedSongIndex = -1;
+            _songListView.ClearSelection();
+            ShowPanel(_songSelectScreen);
+        }
+    }
+
+    // ───────────────────────────── INFO SCREEN (Tutorial / Scales) ─────────────────────────────
+
+    private void WireInfoScreen()
+    {
+        _infoTitle = _root.Q<Label>("info-title");
+        _infoText = _root.Q<Label>("info-text");
+
+        _root.Q<Button>("info-back-button").clicked += () => ShowPanel(_modeSelectScreen);
+    }
+
+    private void ShowInfoScreen(GameMode mode)
+    {
+        if (mode == GameMode.Tutorial)
+        {
+            _infoTitle.text = "TUTORIAL";
+            _infoText.text =
+                "Welcome to the Tutorial!\n\n" +
+                "This mode will walk you through the fundamentals of playing guitar. " +
+                "Follow the on-screen prompts, match the highlighted frets, and build " +
+                "your skills one step at a time. Take it slow — there's no rush!";
+        }
+        else if (mode == GameMode.Scales)
+        {
+            _infoTitle.text = "SCALES";
+            _infoText.text =
+                "Time to practice your scales!\n\n" +
+                "Scales are the building blocks of melody and improvisation. " +
+                "Work through each pattern shown on screen to develop finger " +
+                "dexterity and fretboard familiarity. Repeat as needed!";
+        }
+
+        ShowPanel(_infoScreen);
     }
 
     // ───────────────────────────── SONG SELECT ─────────────────────────────
