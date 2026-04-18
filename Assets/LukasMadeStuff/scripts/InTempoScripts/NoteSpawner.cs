@@ -26,8 +26,8 @@ public class NoteSpawner : MonoBehaviour
     {
         float songTime = music.time;
 
-        while (nextNote < notes.Count &&
-               notes[nextNote].time <= songTime + spawnAheadTime)
+        //while (nextNote < notes.Count && notes[nextNote].time <= songTime + spawnAheadTime)
+        while (nextNote < notes.Count)
         {
             laneManager.SpawnNote(notes[nextNote], songTime);
 

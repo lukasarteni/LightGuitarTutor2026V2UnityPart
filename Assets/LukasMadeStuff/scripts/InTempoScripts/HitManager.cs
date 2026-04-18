@@ -13,79 +13,99 @@ public class HitManager : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame & Keyboard.current.zKey.wasPressedThisFrame)
-            Debug.Log("Am2");
-        if (Keyboard.current.shiftKey.wasPressedThisFrame)
-        {
-            if (Keyboard.current.aKey.wasPressedThisFrame){
-                TryHit("Am");
-                Debug.Log("Am");}
-            if (Keyboard.current.eKey.wasPressedThisFrame)
-                TryHit("Em");
-            if (Keyboard.current.dKey.wasPressedThisFrame)
-                TryHit("Dm");
-        }
-        else
-        {
-            if (Keyboard.current.aKey.wasPressedThisFrame)
-                TryHit("A");
-            if (Keyboard.current.bKey.wasPressedThisFrame){
-                TryHit("B");
-                 Debug.Log("this is where B was pressed");}
-            if (Keyboard.current.cKey.wasPressedThisFrame)
-                TryHit("C");
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+            TryHit("A");
+        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+            TryHit("B");
+        if (Keyboard.current.digit3Key.wasPressedThisFrame)
+            TryHit("C");
+        if (Keyboard.current.digit4Key.wasPressedThisFrame)
+            TryHit("D");
+        if (Keyboard.current.digit5Key.wasPressedThisFrame)
+            TryHit("E");
+        if (Keyboard.current.digit6Key.wasPressedThisFrame)
+            TryHit("F");
+        if (Keyboard.current.digit7Key.wasPressedThisFrame)
+            TryHit("G");
 
-            if (Keyboard.current.dKey.wasPressedThisFrame)
-                TryHit("D");
-            if (Keyboard.current.eKey.wasPressedThisFrame)
-                TryHit("E");
-            if (Keyboard.current.fKey.wasPressedThisFrame)
-                TryHit("F");
-
-            if (Keyboard.current.gKey.wasPressedThisFrame)
-                TryHit("G");
-        }
+        if (Keyboard.current.f1Key.wasPressedThisFrame)
+            TryHit("Am");
+        if (Keyboard.current.f2Key.wasPressedThisFrame)
+            TryHit("Bm");
+        if (Keyboard.current.f3Key.wasPressedThisFrame)
+            TryHit("Cm");
+        if (Keyboard.current.f4Key.wasPressedThisFrame)
+            TryHit("Dm");
+        if (Keyboard.current.f5Key.wasPressedThisFrame)
+            TryHit("Em");
+        if (Keyboard.current.f6Key.wasPressedThisFrame)
+            TryHit("Fm");
+        if (Keyboard.current.f7Key.wasPressedThisFrame)
+            TryHit("Gm");
     }
 
     void TryHit(string chordSent)
     {
-        
+        Debug.Log("this is the fucker you sent : " + chordSent);
         float songTime = music.time;
 
-        NoteData closest = null;
-        float closestError = float.MaxValue;
+        NoteData target = null;
 
         foreach (var note in spawner.notes)
         {
             if (note.hit)
                 continue;
+
+            float timeDiff = note.time - songTime;
+
+            // 🟣 Stop if future notes are too far
+            if (timeDiff > goodWindow)
+                break;
+
+            // 🔴 Clean up old notes (regardless of chord)
+            if (-timeDiff > goodWindow)
+            {
+                note.hit = true;
+
+                if (note.obj != null)
+                    Destroy(note.obj);
+
+                Debug.Log("MISS (too late): " + note.chord);
+                continue;
+            }
+
             if (note.chord != chordSent)
                 continue;
 
-            float error = Mathf.Abs(songTime - note.time);
-
-            if (error < closestError)
-            {
-                closestError = error;
-                closest = note;
-            }
+            target = note;
+            break;
         }
 
-        if (closest == null)
-            return;
-
-        if (closestError <= goodWindow)
+        if (target == null)
         {
-            closest.hit = true;
+            Debug.Log("MISS (no matching chord in window)");
+            return;
+        }
 
-            if (closest.obj != null)
-                Destroy(closest.obj);
+        float error = Mathf.Abs(songTime - target.time);
 
-            Debug.Log("HIT " + chordSent);
+        if (error <= perfectWindow)
+        {
+            Debug.Log("PERFECT " + chordSent);
+        }
+        else if (error <= goodWindow)
+        {
+            Debug.Log("GOOD " + chordSent);
         }
         else
         {
             Debug.Log("MISS");
+            return;
         }
+
+        target.hit = true;
+
+        if (target.obj != null)
+            Destroy(target.obj);
     }
 }
