@@ -19,6 +19,7 @@ public class MenuManager : MonoBehaviour
     // Info-screen helpers
     private Label _infoTitle;
     private Label _infoText;
+    private VisualElement _scalesButtonGroup;
 
     // Song-select helpers
     private ListView _songListView;
@@ -132,8 +133,23 @@ public class MenuManager : MonoBehaviour
     {
         _infoTitle = _root.Q<Label>("info-title");
         _infoText = _root.Q<Label>("info-text");
+        _scalesButtonGroup = _root.Q<VisualElement>("scales-button-group");
 
         _root.Q<Button>("info-back-button").clicked += () => ShowPanel(_modeSelectScreen);
+
+        // Scale-type placeholder buttons
+        _root.Q<Button>("scales-major-button").clicked += () =>
+        {
+            Debug.Log("MAJOR scale selected — placeholder");
+        };
+        _root.Q<Button>("scales-minor-button").clicked += () =>
+        {
+            Debug.Log("MINOR scale selected — placeholder");
+        };
+        _root.Q<Button>("scales-blues-button").clicked += () =>
+        {
+            Debug.Log("BLUES scale selected — placeholder");
+        };
     }
 
     private void ShowInfoScreen(GameMode mode)
@@ -146,6 +162,7 @@ public class MenuManager : MonoBehaviour
                 "This mode will walk you through the fundamentals of playing guitar. " +
                 "Follow the on-screen prompts, match the highlighted frets, and build " +
                 "your skills one step at a time. Take it slow — there's no rush!";
+            _scalesButtonGroup.style.display = DisplayStyle.None;
         }
         else if (mode == GameMode.Scales)
         {
@@ -155,6 +172,7 @@ public class MenuManager : MonoBehaviour
                 "Scales are the building blocks of melody and improvisation. " +
                 "Work through each pattern shown on screen to develop finger " +
                 "dexterity and fretboard familiarity. Repeat as needed!";
+            _scalesButtonGroup.style.display = DisplayStyle.Flex;
         }
 
         ShowPanel(_infoScreen);
@@ -177,6 +195,7 @@ public class MenuManager : MonoBehaviour
         _songListView.selectionChanged += (items) =>
         {
             _selectedSongIndex = _songListView.selectedIndex;
+            _songListView.RefreshItems();
         };
 
         _root.Q<Button>("confirm-button").clicked += OnConfirmSong;
@@ -237,6 +256,12 @@ public class MenuManager : MonoBehaviour
                 badge.AddToClassList("difficulty-hard");
                 break;
         }
+
+        // Highlight the selected row
+        if (index == _selectedSongIndex)
+            element.AddToClassList("song-row-selected");
+        else
+            element.RemoveFromClassList("song-row-selected");
     }
 
     private void RefreshSongSelectHeader()
@@ -257,12 +282,28 @@ public class MenuManager : MonoBehaviour
     {
         if (songs == null || _selectedSongIndex < 0 || _selectedSongIndex >= songs.Length)
         {
-            Debug.LogWarning("MenuManager: No song selected.");
+            Debug.LogWarning("MenuManager: No song selected — please pick a song first.");
             return;
         }
 
-        GameManager.Instance.SetSong(songs[_selectedSongIndex]);
-        SceneManager.LoadScene("GameScene");
+        var song = songs[_selectedSongIndex];
+        GameManager.Instance.SetSong(song);
+
+        Debug.Log($"Playing {song.songName} by {song.artist}. Length: {song.duration}, Difficulty: {song.difficulty}");
+
+        var mode = GameManager.Instance.selectedMode;
+        switch (mode)
+        {
+            case GameMode.SlowAndSteady:
+                SceneManager.LoadScene("LearningScene");
+                break;
+            case GameMode.Live:
+                SceneManager.LoadScene("InTempoScene");
+                break;
+            default:
+                Debug.LogWarning($"MenuManager: No scene mapping for mode '{mode}'.");
+                break;
+        }
     }
 
     // ───────────────────────────── OPTIONS ─────────────────────────────

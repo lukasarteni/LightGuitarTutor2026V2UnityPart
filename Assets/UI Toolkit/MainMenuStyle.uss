@@ -242,6 +242,11 @@
     border-color: rgba(56, 120, 255, 0.6);
 }
 
+/* Hide the default ListView selection highlight so our custom class takes over */
+.song-list .unity-list-view__item--selected {
+    background-color: rgba(0, 0, 0, 0);
+}
+
 .song-name {
     flex-grow: 1;
     color: rgb(230, 230, 240);
@@ -317,9 +322,9 @@
     border-width: 2px;
     border-color: rgba(255, 255, 255, 0.08);
     overflow: hidden;
-    max-width: 1100px;
+    max-width: 1440px;
     width: 95%;
-    max-height: 600px;
+    max-height: 1231px;
 }
 
 /* Left side — large image */
@@ -370,9 +375,73 @@
     flex-grow: 1;
 }
 
-.info-back-btn {
-    align-self: flex-start;
-    margin-top: 16px;
+/* Scale-type buttons (left side of info screen) */
+.scales-button-group {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 12px;
+    min-width: 120px;
+    background-color: rgba(22, 22, 34, 1);
+    border-right-width: 2px;
+    border-right-color: rgba(255, 255, 255, 0.06);
+}
+
+.scale-type-button {
+    width: 110px;
+    height: 52px;
+    font-size: 17px;
+    -unity-font-style: bold;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(40, 40, 56, 1);
+    color: rgb(210, 210, 220);
+    margin: 8px 0;
+    letter-spacing: 2px;
+    transition-duration: 0.15s;
+}
+
+.scale-type-button:hover {
+    scale: 1.06;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.scale-type-button:active {
+    scale: 0.95;
+}
+
+.major-btn {
+    background-color: rgba(56, 120, 255, 0.85);
+    border-color: rgba(100, 160, 255, 0.4);
+    color: rgb(255, 255, 255);
+}
+
+.major-btn:hover {
+    background-color: rgba(80, 140, 255, 1);
+    border-color: rgba(130, 180, 255, 0.6);
+}
+
+.minor-btn {
+    background-color: rgba(160, 70, 200, 0.85);
+    border-color: rgba(190, 110, 230, 0.4);
+    color: rgb(255, 255, 255);
+}
+
+.minor-btn:hover {
+    background-color: rgba(180, 90, 220, 1);
+    border-color: rgba(210, 140, 240, 0.6);
+}
+
+.blues-btn {
+    background-color: rgba(200, 140, 40, 0.85);
+    border-color: rgba(230, 180, 70, 0.4);
+    color: rgb(255, 255, 255);
+}
+
+.blues-btn:hover {
+    background-color: rgba(220, 160, 50, 1);
+    border-color: rgba(240, 200, 90, 0.6);
 }
 
 /* ===================================================

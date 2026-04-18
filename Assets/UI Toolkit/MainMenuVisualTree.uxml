@@ -54,14 +54,19 @@
     <ui:VisualElement name="info-screen" class="screen">
         <ui:VisualElement class="info-screen-content">
             <ui:VisualElement class="info-body">
+                <ui:VisualElement name="scales-button-group" class="scales-button-group">
+                    <ui:Button text="MAJOR" name="scales-major-button" class="scale-type-button major-btn"/>
+                    <ui:Button text="MINOR" name="scales-minor-button" class="scale-type-button minor-btn"/>
+                    <ui:Button text="BLUES" name="scales-blues-button" class="scale-type-button blues-btn"/>
+                </ui:VisualElement>
                 <ui:VisualElement name="info-image" class="info-image"/>
                 <ui:VisualElement class="info-text-panel">
                     <ui:Label text="TUTORIAL" name="info-title" class="info-title"/>
                     <ui:VisualElement class="info-divider"/>
                     <ui:Label text="Placeholder text goes here." name="info-text" class="info-text"/>
-                    <ui:Button text="Back" name="info-back-button" class="menu-button back-button info-back-btn"/>
                 </ui:VisualElement>
             </ui:VisualElement>
+            <ui:Button text="Back" name="info-back-button" class="menu-button back-button"/>
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="options-screen" class="screen">
