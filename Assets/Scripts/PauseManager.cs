@@ -33,6 +33,7 @@ public class PauseManager : MonoBehaviour
 
     private bool _isPaused;
     private bool _isCountingDown;
+    private bool _songStarted;
     private Coroutine _countdownCoroutine;
 
     // ───────────────────────── LIFECYCLE ─────────────────────────
@@ -84,6 +85,9 @@ public class PauseManager : MonoBehaviour
             if (audioGO != null)
                 musicSource = audioGO.GetComponent<AudioSource>();
         }
+
+        // Start the song with a countdown
+        StartCoroutine(StartSongCountdown());
     }
 
     private void Update()
@@ -100,10 +104,38 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+    // ───────────────────────── START COUNTDOWN ─────────────────────────
+
+    private IEnumerator StartSongCountdown()
+    {
+        _isCountingDown = true;
+        Time.timeScale = 0f;
+
+        _countdownOverlay.style.display = DisplayStyle.Flex;
+
+        for (int i = 5; i >= 1; i--)
+        {
+            _countdownLabel.text = i.ToString();
+            yield return new WaitForSecondsRealtime(1f);
+        }
+
+        _countdownOverlay.style.display = DisplayStyle.None;
+        _isCountingDown = false;
+        _songStarted = true;
+
+        // Un-pause and start the music
+        Time.timeScale = 1f;
+
+        if (musicSource != null)
+            musicSource.Play();
+    }
+
     // ───────────────────────── PAUSE / RESUME ─────────────────────────
 
     private void Pause()
     {
+        if (!_songStarted) return; // Can't pause during start countdown
+
         _isPaused = true;
         Time.timeScale = 0f;
 
