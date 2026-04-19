@@ -44,6 +44,12 @@
                 <ui:Label text="SELECT SONG" class="screen-title"/>
                 <ui:Label text="Tutorial" name="mode-badge" class="mode-badge"/>
             </ui:VisualElement>
+            <ui:VisualElement class="song-column-headers">
+                <ui:Label text="TITLE" class="col-header col-header-name"/>
+                <ui:Label text="ARTIST" class="col-header col-header-artist"/>
+                <ui:Label text="TIME" class="col-header col-header-duration"/>
+                <ui:Label text="LEVEL" class="col-header col-header-difficulty"/>
+            </ui:VisualElement>
             <ui:ListView name="song-list" class="song-list"/>
             <ui:VisualElement class="song-footer-row">
                 <ui:Button text="Back" name="song-back-button" class="menu-button back-button"/>
