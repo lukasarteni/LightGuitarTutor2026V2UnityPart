@@ -11,10 +11,12 @@ public class HitManager : MonoBehaviour
     public AudioSource music;
 
     public NoteSpawner spawner;
+    public UIManager UIManage;
 
     public float perfectWindow = 1f;
     public float goodWindow = 2f;
     int currentNoteIndex = 0;
+    
 
     void Update()
     {
@@ -47,17 +49,16 @@ public class HitManager : MonoBehaviour
         if (Keyboard.current.uKey.wasPressedThisFrame)
             TryHit("Gm");
     }
-
-    void UpdateTheCurrentPlayingTextOnUI(string newChord)
+    void UpdateTheAccuracyTextOnUI()
     {
-        currentPlayingTextUI.text = "Currently Playing: " + newChord;
+        
     }
-
+   
     void TryHit(string chordSent)
     {
         //IMPORTANT probably need to sync music with visuals by 2.5
         float SongTimeForTargetChecks = music.time - 2.5f;
-        UpdateTheCurrentPlayingTextOnUI(chordSent + " " + SongTimeForTargetChecks); //changelater
+        UIManage.UpdateTheCurrentPlayingTextOnUI(chordSent + " " + SongTimeForTargetChecks); //changelater
 
         NoteData target = null;
 
