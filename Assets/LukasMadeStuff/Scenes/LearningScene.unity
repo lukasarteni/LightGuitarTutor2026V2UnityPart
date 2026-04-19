@@ -164,6 +164,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &202594066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 202594069}
+  - component: {fileID: 202594068}
+  - component: {fileID: 202594067}
+  m_Layer: 0
+  m_Name: PauseMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &202594067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202594066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbaf81eef9e9bc4a807ad6132e874f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseManager
+  musicSource: {fileID: 0}
+--- !u!114 &202594068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202594066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: d96b1c289df92ed48862453b73f3b956, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 22c9760df5f964240853e82aa90e057e, type: 3}
+  m_SortingOrder: 100
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!4 &202594069
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202594066}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &247728052
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,15 +1057,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LaneManager
   scoringPlank: {fileID: 1083381175}
   aTargetPrefab: {fileID: 5105447740105109324, guid: 09565d1b13d2093449caf9032d8ec119, type: 3}
-  bTargetPrefab: {fileID: 4291585953608209672, guid: e7c3dda0f5c94c747bb105cdc0fa8da5, type: 3}
-  cTargetPrefab: {fileID: 4291585953608209672, guid: da7d60290dab14b40b16b0048f0c6667, type: 3}
-  dTargetPrefab: {fileID: 4291585953608209672, guid: f4789fff2c15d434391565b926ee347a, type: 3}
-  eTargetPrefab: {fileID: 4291585953608209672, guid: 2f60027565cbec14cb4c08905d8beee5, type: 3}
-  fTargetPrefab: {fileID: 4291585953608209672, guid: c247145485a91fc46aa36d579a1008ca, type: 3}
-  gTargetPrefab: {fileID: 5008257183275253333, guid: 44b5a73bcc993ce4c8461615f88daf8c, type: 3}
   amTargetPrefab: {fileID: 4291585953608209672, guid: e4fca8092b7534647b8cbe6ab9137719, type: 3}
+  bTargetPrefab: {fileID: 4291585953608209672, guid: e7c3dda0f5c94c747bb105cdc0fa8da5, type: 3}
+  bmTargetPrefab: {fileID: 0}
+  cTargetPrefab: {fileID: 4291585953608209672, guid: da7d60290dab14b40b16b0048f0c6667, type: 3}
+  cmTargetPrefab: {fileID: 0}
+  dTargetPrefab: {fileID: 4291585953608209672, guid: f4789fff2c15d434391565b926ee347a, type: 3}
   dmTargetPrefab: {fileID: 4291585953608209672, guid: d2154e2b5a5ce5c4793b5e9e4239c328, type: 3}
+  eTargetPrefab: {fileID: 4291585953608209672, guid: 2f60027565cbec14cb4c08905d8beee5, type: 3}
   emTargetPrefab: {fileID: 4042890284675892817, guid: d97ffafc9eecda74591928166552e4fb, type: 3}
+  fTargetPrefab: {fileID: 4291585953608209672, guid: c247145485a91fc46aa36d579a1008ca, type: 3}
+  fmTargetPrefab: {fileID: 0}
+  gTargetPrefab: {fileID: 5008257183275253333, guid: 44b5a73bcc993ce4c8461615f88daf8c, type: 3}
+  gmTargetPrefab: {fileID: 0}
+  NullTargetPrefab: {fileID: 0}
   scrollSpeed: 5
 --- !u!4 &772600752
 Transform:
@@ -2542,3 +2616,4 @@ SceneRoots:
   - {fileID: 451027247}
   - {fileID: 1818031203}
   - {fileID: 22091592}
+  - {fileID: 202594069}
