@@ -19,7 +19,7 @@ public class NoteSpawner : MonoBehaviour
     {
         notes = chartGenerator.GenerateChart();
 
-        music.Play();
+        // Music is started by PauseManager after the countdown
     }
 
     void Update()
