@@ -2542,7 +2542,5 @@ SceneRoots:
   - {fileID: 451027247}
   - {fileID: 1818031203}
   - {fileID: 22091592}
-<<<<<<< HEAD
-=======
   - {fileID: 202594069}
->>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
+  - {fileID: 1294793919}
