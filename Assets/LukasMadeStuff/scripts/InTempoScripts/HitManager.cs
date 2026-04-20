@@ -20,8 +20,9 @@ public class HitManager : MonoBehaviour
 
     void Update()
     {
-        cullTheOldNotes();
+        CullOldNotes();
         UpdateTheAccuracyAndScore();
+
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
             TryHit("A");
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
@@ -59,15 +60,7 @@ public class HitManager : MonoBehaviour
         if (correctlyHitNotesNumber == 0)
         {
             gameHud.SetScore(0);
-
-            if (currentNoteIndex == 0)
-            {
-                gameHud.SetAccuracy(100);
-            }
-            else
-            {
-                gameHud.SetAccuracy(0);
-            }
+            gameHud.SetAccuracy(currentNoteIndex == 0 ? 100 : 0);
         }
         else
         {
@@ -76,16 +69,20 @@ public class HitManager : MonoBehaviour
         }
     }
 
-    void cullTheOldNotes()
+    /// <summary>
+    /// Automatically marks notes as MISS and destroys them once they've scrolled
+    /// past the scoring plank beyond the good-hit window.
+    /// </summary>
+    void CullOldNotes()
     {
-        float SongTimeForTargetChecks = music.time - 2.5f;
+        float songTime = music.time;
 
         while (currentNoteIndex < spawner.notes.Count)
         {
             var note = spawner.notes[currentNoteIndex];
-            float timeDiff = note.time - SongTimeForTargetChecks;
 
-            if (timeDiff < (0.5f - goodWindow))
+            // Note is in the past if songTime is well beyond note.time
+            if (songTime - note.time > goodWindow)
             {
                 note.hit = true;
                 if (note.obj != null)
@@ -95,39 +92,47 @@ public class HitManager : MonoBehaviour
                 if (gameHud != null) gameHud.ShowMiss();
             }
             else
+            {
                 break;
+            }
         }
     }
 
     void TryHit(string chordSent)
     {
-        //IMPORTANT probably need to sync music with visuals by 2.5
-        float SongTimeForTargetChecks = music.time - 2.1f;
+        float songTime = music.time;
+
         if (gameHud != null)
-            gameHud.SetCurrentPlaying(chordSent + " " + SongTimeForTargetChecks);
+            gameHud.SetCurrentPlaying(chordSent);
 
         NoteData target = null;
 
-        // Search a small window ahead (with bounds check)
-        for (
-            int i = currentNoteIndex;
-            i < Mathf.Min(currentNoteIndex + 5, spawner.notes.Count);
-            i++
-        )
+        // Search a small window ahead from the current note index
+        for (int i = currentNoteIndex;
+             i < Mathf.Min(currentNoteIndex + 10, spawner.notes.Count);
+             i++)
         {
             var note = spawner.notes[i];
 
             if (note.hit)
                 continue;
 
-            float timeDiff = note.time - SongTimeForTargetChecks;
+            float timeDiff = note.time - songTime;
+
+            // Note is too far in the future — stop searching
             if (timeDiff > goodWindow)
                 break;
+
+            // Wrong chord — skip
             if (note.chord != chordSent)
                 continue;
 
-            target = note;
-            break;
+            // Note is within the hit window (could be slightly early or late)
+            if (Mathf.Abs(timeDiff) <= goodWindow)
+            {
+                target = note;
+                break;
+            }
         }
 
         if (target == null)
@@ -137,28 +142,29 @@ public class HitManager : MonoBehaviour
         }
 
         // Evaluate timing
-        float error = Mathf.Abs(SongTimeForTargetChecks - target.time);
+        float error = Mathf.Abs(songTime - target.time);
 
         if (error <= perfectWindow)
         {
             correctlyHitNotesNumber++;
-            Debug.Log("PERFECT " + chordSent + " " + error);
+            Debug.Log("PERFECT " + chordSent + " (error: " + error.ToString("F3") + "s)");
             target.hit = true;
             if (gameHud != null) gameHud.ShowPerfect();
         }
         else if (error <= goodWindow)
         {
             correctlyHitNotesNumber += 0.9f;
-            Debug.Log("GOOD " + chordSent + " " + error);
+            Debug.Log("GOOD " + chordSent + " (error: " + error.ToString("F3") + "s)");
             target.hit = true;
             if (gameHud != null) gameHud.ShowGood();
         }
         else
         {
-            Debug.Log("MISS");
+            Debug.Log("MISS " + chordSent + " (error: " + error.ToString("F3") + "s)");
             return;
         }
 
+        // Destroy the note's visual object
         if (target.obj != null)
             Destroy(target.obj);
 

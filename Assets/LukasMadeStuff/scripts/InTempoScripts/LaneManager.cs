@@ -5,6 +5,8 @@ public class LaneManager : MonoBehaviour
 {
     public Transform scoringPlank;
 
+    public AudioSource music;
+
     public GameObject aTargetPrefab;
     public GameObject amTargetPrefab;
     public GameObject bTargetPrefab;
@@ -52,18 +54,25 @@ public class LaneManager : MonoBehaviour
 
     public GameObject SpawnNote(NoteData note, float songTime)
     {
-        GameObject prefab = prefabMap[note.chord];
+        GameObject prefab = prefabMap.ContainsKey(note.chord) ? prefabMap[note.chord] : null;
+        if (prefab == null)
+            prefab = NullTargetPrefab;
 
         float timeUntilHit = note.time - songTime;
-
         float xOffset = timeUntilHit * scrollSpeed;
 
         Vector3 spawnPos = new Vector3(scoringPlank.position.x + xOffset, fixedY, fixedZ);
-        GameObject obj;
-        if (prefab == null)
-            obj = Instantiate(NullTargetPrefab, spawnPos, Quaternion.identity);
-        else
-            obj = Instantiate(prefab, spawnPos, Quaternion.identity);
+        GameObject obj = Instantiate(prefab, spawnPos, Quaternion.identity);
+
+        // Configure the NoteScroller so it positions based on music.time
+        NoteScroller scroller = obj.GetComponent<NoteScroller>();
+        if (scroller != null)
+        {
+            scroller.speed = scrollSpeed;
+            scroller.noteTime = note.time;
+            scroller.scoringPlankX = scoringPlank.position.x;
+            scroller.music = music;
+        }
 
         note.obj = obj;
 
