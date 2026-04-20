@@ -61,14 +61,51 @@ public class MenuManager : MonoBehaviour
         _allPanels.Add(_infoScreen);
         _allPanels.Add(_optionsScreen);
 
-        // Start with only main menu visible
-        ShowPanel(_mainMenuScreen);
-
         WireMainMenuButtons();
         WireModeSelectButtons();
         WireSongSelectScreen();
         WireInfoScreen();
         WireOptionsScreen();
+
+        // Check if we should navigate to a specific screen on load
+        HandleReturnNavigation();
+    }
+
+    /// <summary>
+    /// If the player is returning from a gameplay scene (e.g. Song Complete),
+    /// navigate directly to the appropriate screen instead of the main menu.
+    /// </summary>
+    private void HandleReturnNavigation()
+    {
+        string returnTo = PlayerPrefs.GetString("ReturnTo", "");
+        PlayerPrefs.DeleteKey("ReturnTo");
+        PlayerPrefs.Save();
+
+        switch (returnTo)
+        {
+            case "SongSelect":
+                // Restore the previously selected mode and go to song select
+                if (GameManager.Instance != null)
+                {
+                    RefreshSongSelectHeader();
+                    _selectedSongIndex = -1;
+                    _songListView.ClearSelection();
+                    ShowPanel(_songSelectScreen);
+                }
+                else
+                {
+                    ShowPanel(_mainMenuScreen);
+                }
+                break;
+
+            case "ModeSelect":
+                ShowPanel(_modeSelectScreen);
+                break;
+
+            default:
+                ShowPanel(_mainMenuScreen);
+                break;
+        }
     }
 
     // ───────────────────────────── PANEL SWITCHING ─────────────────────────────

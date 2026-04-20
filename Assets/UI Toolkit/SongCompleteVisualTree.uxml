@@ -1,0 +1,53 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ui="UnityEngine.UIElements"
+         noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
+         editor-extension-mode="False">
+
+    <Style src="project://database/Assets/UI%20Toolkit/SongCompleteStyle.uss" />
+
+    <!-- SONG COMPLETE OVERLAY (hidden by default) -->
+    <ui:VisualElement name="song-complete-overlay" class="song-complete-overlay" style="display:none;">
+        <ui:VisualElement name="song-complete-panel" class="song-complete-panel">
+
+            <!-- Title -->
+            <ui:Label text="SONG COMPLETE!" name="complete-title" class="complete-title" />
+
+            <!-- Song info -->
+            <ui:Label text="Song Name - Artist" name="complete-song-info" class="complete-song-info" />
+
+            <!-- Stats container -->
+            <ui:VisualElement name="stats-container" class="stats-container">
+                <ui:VisualElement class="stat-row">
+                    <ui:Label text="Score" class="stat-label" />
+                    <ui:Label text="0" name="final-score" class="stat-value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="stat-row">
+                    <ui:Label text="Accuracy" class="stat-label" />
+                    <ui:Label text="0%" name="final-accuracy" class="stat-value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="stat-row">
+                    <ui:Label text="Perfect Hits" class="stat-label" />
+                    <ui:Label text="0" name="final-perfects" class="stat-value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="stat-row">
+                    <ui:Label text="Good Hits" class="stat-label" />
+                    <ui:Label text="0" name="final-goods" class="stat-value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="stat-row">
+                    <ui:Label text="Misses" class="stat-label" />
+                    <ui:Label text="0" name="final-misses" class="stat-value" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- Buttons -->
+            <ui:VisualElement name="complete-buttons" class="complete-buttons">
+                <ui:Button text="Play Again" name="play-again-button" class="complete-button complete-success" />
+                <ui:Button text="Select Another Song" name="another-song-button" class="complete-button complete-primary" />
+                <ui:Button text="Select Different Mode" name="different-mode-button" class="complete-button" />
+                <ui:Button text="Main Menu" name="complete-main-menu-button" class="complete-button complete-danger" />
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+    </ui:VisualElement>
+
+</ui:UXML>
