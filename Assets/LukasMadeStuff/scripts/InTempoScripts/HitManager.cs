@@ -16,10 +16,12 @@ public class HitManager : MonoBehaviour
     public float perfectWindow = 1f;
     public float goodWindow = 2f;
     int currentNoteIndex = 0;
-    
+    float correctlyHitNotesNumber = 0f;
 
     void Update()
     {
+        cullTheOldNotes();
+        UpdateTheAccuracyAndScore();
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
             TryHit("A");
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
@@ -49,19 +51,60 @@ public class HitManager : MonoBehaviour
         if (Keyboard.current.uKey.wasPressedThisFrame)
             TryHit("Gm");
     }
-    void UpdateTheAccuracyTextOnUI()
+
+    void UpdateTheAccuracyAndScore()
     {
-        
+        if (correctlyHitNotesNumber == 0)
+        {
+            UIManage.UpdateThePointTextOnUI(0);
+
+            if (currentNoteIndex == 0)
+            {
+                UIManage.UpdateTheAccuracyTextOnUI(100);
+            }
+            else
+            {
+                UIManage.UpdateTheAccuracyTextOnUI(0);
+            }
+        }
+        else
+        {
+            UIManage.UpdateThePointTextOnUI(correctlyHitNotesNumber * 100);
+            UIManage.UpdateTheAccuracyTextOnUI(correctlyHitNotesNumber / currentNoteIndex * 100);
+        }
     }
-   
+
+    void cullTheOldNotes()
+    {
+        float SongTimeForTargetChecks = music.time - 2.5f;
+
+        while (currentNoteIndex < spawner.notes.Count)
+        {
+            var note = spawner.notes[currentNoteIndex];
+            float timeDiff = note.time - SongTimeForTargetChecks;
+
+            if (timeDiff < (0.5f - goodWindow))
+            {
+                note.hit = true;
+                if (note.obj != null)
+                    Destroy(note.obj);
+                Debug.Log("MISS (too late): " + note.chord);
+                currentNoteIndex++;
+                UIManage.ShowTheMissHit();
+            }
+            else
+                break;
+        }
+    }
+
     void TryHit(string chordSent)
     {
         //IMPORTANT probably need to sync music with visuals by 2.5
-        float SongTimeForTargetChecks = music.time - 2.5f;
+        float SongTimeForTargetChecks = music.time - 2.1f;
         UIManage.UpdateTheCurrentPlayingTextOnUI(chordSent + " " + SongTimeForTargetChecks); //changelater
 
         NoteData target = null;
-
+        /*
         // Step 1: Advance index past missed notes
         while (currentNoteIndex < spawner.notes.Count)
         {
@@ -79,7 +122,7 @@ public class HitManager : MonoBehaviour
             else
                 break;
         }
-
+        */
         // Step 2: Search a small window ahead (with bounds check)
         for (
             int i = currentNoteIndex;
@@ -113,13 +156,17 @@ public class HitManager : MonoBehaviour
 
         if (error <= perfectWindow)
         {
+            correctlyHitNotesNumber++;
             Debug.Log("PERFECT " + chordSent + " " + error);
             target.hit = true;
+            UIManage.ShowThePerfectHit();
         }
         else if (error <= goodWindow)
         {
+            correctlyHitNotesNumber += 0.9f;
             Debug.Log("GOOD " + chordSent + " " + error);
             target.hit = true;
+            UIManage.ShowTheGoodHit();
         }
         else
         {
@@ -136,73 +183,4 @@ public class HitManager : MonoBehaviour
             currentNoteIndex++;
         }
     }
-
-    /*void TryHit(string chordSent)
-        {
-            //Debug.Log("this is the fucker you sent : " + chordSent);
-            UpdateTheCurrentPlayingTextOnUI(chordSent);
-            float songTime = music.time;
-    
-            NoteData target = null;
-    
-            foreach (var note in spawner.notes)
-            {
-                if (note.hit)
-                    continue;
-    
-                //float timeDiff = note.time - songTime;
-                float timeDiff = 2.1f;
-    
-                // 🟣 Stop if future notes are too far
-                if (timeDiff > goodWindow)
-                    break;
-    
-                // 🔴 Clean up old notes (regardless of chord)
-                if (-timeDiff > goodWindow)
-                {
-                    note.hit = true;
-    
-                    if (note.obj != null)
-                        Destroy(note.obj);
-    
-                    Debug.Log("MISS (too late): " + note.chord);
-                    continue;
-                }
-    
-                if (note.chord != chordSent)
-                    continue;
-    
-                target = note;
-                break;
-            }
-    
-            if (target == null)
-            {
-                Debug.Log("MISS (no matching chord in window)");
-                return;
-            }
-    
-            float error = Mathf.Abs(songTime - target.time);
-    
-            if (error <= perfectWindow)
-            {
-                Debug.Log("PERFECT " + chordSent);
-            }
-            else if (error <= goodWindow)
-            {
-                Debug.Log("GOOD " + chordSent);
-            }
-            else
-            {
-                Debug.Log("MISS");
-                return;
-            }
-    
-            target.hit = true;
-    
-            if (target.obj != null)
-                Destroy(target.obj);
-        }
-    }
-    */
 }
