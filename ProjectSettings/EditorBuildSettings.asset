@@ -8,12 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/LukasMadeStuff/Scenes/MainMenu.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
-    path: Assets/LukasMadeStuff/Scenes/LearningScene.unity
-    guid: c4296907b30e67c479f9dd11fa03a24d
-  - enabled: 1
-    path: Assets/LukasMadeStuff/Scenes/InTempoScene.unity
-    guid: 7e59460a485ffca4f8594b038a241f18
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

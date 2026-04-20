@@ -242,84 +242,31 @@
     border-color: rgba(56, 120, 255, 0.6);
 }
 
-/* Hide the default ListView selection highlight so our custom class takes over */
-.song-list .unity-list-view__item--selected {
-    background-color: rgba(0, 0, 0, 0);
-}
-
-/* Column header row above the list */
-.song-column-headers {
-    flex-direction: row;
-    align-items: center;
-    width: 700px;
-    padding: 0 24px;
-    margin-bottom: 2px;
-}
-
-.col-header {
-    color: rgba(140, 140, 165, 0.7);
-    font-size: 12px;
-    -unity-font-style: bold;
-    letter-spacing: 2px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.col-header-name {
-    flex-grow: 1;
-    flex-shrink: 1;
-    -unity-text-align: upper-left;
-}
-
-.col-header-artist {
-    width: 150px;
-    flex-shrink: 0;
-    -unity-text-align: upper-left;
-}
-
-.col-header-duration {
-    width: 70px;
-    flex-shrink: 0;
-    -unity-text-align: upper-center;
-}
-
-.col-header-difficulty {
-    width: 80px;
-    flex-shrink: 0;
-    -unity-text-align: upper-center;
-}
-
-/* Data columns */
 .song-name {
     flex-grow: 1;
-    flex-shrink: 1;
     color: rgb(230, 230, 240);
     font-size: 18px;
     -unity-font-style: bold;
-    -unity-text-align: middle-left;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .song-artist {
-    width: 150px;
-    flex-shrink: 0;
+    width: 160px;
     color: rgba(170, 170, 190, 0.9);
     font-size: 15px;
-    -unity-text-align: middle-left;
+    -unity-text-align: upper-center;
 }
 
 .song-duration {
     width: 70px;
-    flex-shrink: 0;
     color: rgba(150, 150, 170, 0.8);
     font-size: 14px;
-    -unity-text-align: middle-center;
+    -unity-text-align: upper-center;
 }
 
 .difficulty-badge {
-    width: 80px;
-    flex-shrink: 0;
+    min-width: 60px;
     height: 24px;
     border-radius: 6px;
     font-size: 13px;
@@ -327,6 +274,7 @@
     -unity-text-align: middle-center;
     color: rgb(255, 255, 255);
     padding: 0 10px;
+    margin-left: 8px;
 }
 
 .difficulty-easy {
@@ -349,146 +297,6 @@
 
 .song-footer-row .menu-button {
     margin: 0 12px;
-}
-
-/* ===================================================
-   INFO SCREEN (Tutorial & Scales)  —  side-by-side
-   =================================================== */
-.info-screen-content {
-    flex-grow: 1;
-    padding: 32px 48px;
-    align-items: center;
-    justify-content: center;
-}
-
-.info-body {
-    flex-direction: row;
-    align-items: stretch;
-    background-color: rgba(26, 26, 38, 1);
-    border-radius: 18px;
-    border-width: 2px;
-    border-color: rgba(255, 255, 255, 0.08);
-    overflow: hidden;
-    max-width: 1440px;
-    width: 95%;
-    max-height: 1231px;
-}
-
-/* Left side — large image */
-.info-image {
-    flex-grow: 1;
-    flex-basis: 0;
-    min-width: 55%;
-    background-image: url("project://database/Assets/RomitMadeStuff/Images/scales.png");
-    -unity-background-scale-mode: scale-to-fit;
-    background-color: rgba(20, 20, 30, 1);
-    border-right-width: 2px;
-    border-right-color: rgba(255, 255, 255, 0.06);
-}
-
-/* Right side — text panel */
-.info-text-panel {
-    flex-basis: 0;
-    flex-grow: 0;
-    width: 340px;
-    min-width: 300px;
-    padding: 40px 32px;
-    align-items: flex-start;
-    justify-content: flex-start;
-}
-
-.info-title {
-    color: rgb(230, 230, 245);
-    font-size: 32px;
-    -unity-font-style: bold;
-    letter-spacing: 4px;
-    margin-bottom: 12px;
-}
-
-.info-divider {
-    width: 60px;
-    height: 3px;
-    background-color: rgba(56, 120, 255, 0.8);
-    border-radius: 2px;
-    margin-bottom: 24px;
-}
-
-.info-text {
-    color: rgba(190, 190, 210, 0.92);
-    font-size: 17px;
-    -unity-text-align: upper-left;
-    white-space: normal;
-    line-height: 170%;
-    flex-grow: 1;
-}
-
-/* Scale-type buttons (left side of info screen) */
-.scales-button-group {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 16px 12px;
-    min-width: 120px;
-    background-color: rgba(22, 22, 34, 1);
-    border-right-width: 2px;
-    border-right-color: rgba(255, 255, 255, 0.06);
-}
-
-.scale-type-button {
-    width: 110px;
-    height: 52px;
-    font-size: 17px;
-    -unity-font-style: bold;
-    border-radius: 10px;
-    border-width: 2px;
-    border-color: rgba(255, 255, 255, 0.1);
-    background-color: rgba(40, 40, 56, 1);
-    color: rgb(210, 210, 220);
-    margin: 8px 0;
-    letter-spacing: 2px;
-    transition-duration: 0.15s;
-}
-
-.scale-type-button:hover {
-    scale: 1.06;
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.scale-type-button:active {
-    scale: 0.95;
-}
-
-.major-btn {
-    background-color: rgba(56, 120, 255, 0.85);
-    border-color: rgba(100, 160, 255, 0.4);
-    color: rgb(255, 255, 255);
-}
-
-.major-btn:hover {
-    background-color: rgba(80, 140, 255, 1);
-    border-color: rgba(130, 180, 255, 0.6);
-}
-
-.minor-btn {
-    background-color: rgba(160, 70, 200, 0.85);
-    border-color: rgba(190, 110, 230, 0.4);
-    color: rgb(255, 255, 255);
-}
-
-.minor-btn:hover {
-    background-color: rgba(180, 90, 220, 1);
-    border-color: rgba(210, 140, 240, 0.6);
-}
-
-.blues-btn {
-    background-color: rgba(200, 140, 40, 0.85);
-    border-color: rgba(230, 180, 70, 0.4);
-    color: rgb(255, 255, 255);
-}
-
-.blues-btn:hover {
-    background-color: rgba(220, 160, 50, 1);
-    border-color: rgba(240, 200, 90, 0.6);
 }
 
 /* ===================================================

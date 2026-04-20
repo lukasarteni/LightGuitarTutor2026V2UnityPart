@@ -19,7 +19,7 @@ public class TimeNoteSpawner : MonoBehaviour
     {
         notes = chartGenerator.GenerateChart();
 
-        // Music is started by PauseManager after the countdown
+        music.Play();
     }
 
     void Update()
