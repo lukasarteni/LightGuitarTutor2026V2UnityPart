@@ -515,6 +515,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289317557}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &300031191
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +653,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300031191}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
 --- !u!1001 &331000081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -880,7 +883,11 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
+<<<<<<< HEAD
   m_SortingOrder: 9999
+=======
+  m_SortingOrder: 0
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
   m_TargetDisplay: 0
 --- !u!224 &422982482
 RectTransform:
@@ -896,7 +903,10 @@ RectTransform:
   m_Children:
   - {fileID: 1885363622}
   - {fileID: 541011225}
+<<<<<<< HEAD
   - {fileID: 934967305}
+=======
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1149,8 +1159,13 @@ RectTransform:
   m_GameObject: {fileID: 541011224}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
   m_LocalScale: {x: 1.04, y: 1.04, z: 1.04}
   m_ConstrainProportionsScale: 1
+=======
+  m_LocalScale: {x: 0.70534253, y: 0.70534253, z: 0.70534253}
+  m_ConstrainProportionsScale: 0
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
   m_Children:
   - {fileID: 885632061}
   m_Father: {fileID: 422982482}
@@ -1181,7 +1196,11 @@ MonoBehaviour:
   m_Spacing: 75
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
+<<<<<<< HEAD
   m_ChildControlWidth: 0
+=======
+  m_ChildControlWidth: 1
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
@@ -1194,6 +1213,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541011224}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &721435960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,6 +1351,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721435960}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
 --- !u!1001 &757945339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1720,15 +1742,24 @@ RectTransform:
   m_GameObject: {fileID: 885632060}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
+=======
+  m_LocalScale: {x: 1.2799687, y: 1.2799687, z: 1.2799687}
+  m_ConstrainProportionsScale: 0
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
   m_Children: []
   m_Father: {fileID: 541011225}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
+<<<<<<< HEAD
   m_SizeDelta: {x: 920, y: 0}
+=======
+  m_SizeDelta: {x: 0, y: 0}
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &885632062
 MonoBehaviour:
@@ -1778,7 +1809,11 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontSize: 103.8
+<<<<<<< HEAD
   m_fontSizeBase: 128.6
+=======
+  m_fontSizeBase: 36
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
@@ -1808,8 +1843,13 @@ MonoBehaviour:
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
+<<<<<<< HEAD
   m_horizontalMapping: 1
   m_verticalMapping: 1
+=======
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
   m_IsTextObjectScaleStatic: 0
@@ -2204,6 +2244,7 @@ Transform:
   - {fileID: 1378033717}
   m_Father: {fileID: 1083381175}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1323568324
 GameObject:
   m_ObjectHideFlags: 0
@@ -2254,6 +2295,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
 --- !u!1 &1349424530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2839,18 +2882,31 @@ RectTransform:
   m_GameObject: {fileID: 1885363621}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
   m_LocalScale: {x: 1.21, y: 1.21, z: 1.21}
   m_ConstrainProportionsScale: 1
+=======
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
   m_Children:
   - {fileID: 455686076}
   - {fileID: 289317558}
   m_Father: {fileID: 422982482}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.00012207031}
   m_SizeDelta: {x: 920, y: 160}
   m_Pivot: {x: 1, y: 1}
+=======
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 500, y: -80}
+  m_SizeDelta: {x: -1000, y: 160}
+  m_Pivot: {x: 0.5, y: 0.5}
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
 --- !u!114 &1885363623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2885,6 +2941,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885363621}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &1885754674
 GameObject:
   m_ObjectHideFlags: 0
@@ -2934,6 +2991,8 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+=======
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
 --- !u!1001 &1918475801
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3274,4 +3333,8 @@ SceneRoots:
   - {fileID: 14466902}
   - {fileID: 1323568326}
   - {fileID: 416527647060805306}
+<<<<<<< HEAD
   - {fileID: 1038375230}
+=======
+  - {fileID: 392716438}
+>>>>>>> parent of d5a82c7 (CHANGED UI FOR THE GAME SCENES)
