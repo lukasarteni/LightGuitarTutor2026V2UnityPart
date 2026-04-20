@@ -13,6 +13,13 @@
             <ui:Label text="Score: 0" name="score-label" class="hud-stat-label" picking-mode="Ignore" />
         </ui:VisualElement>
 
+        <!-- Centre hit feedback -->
+        <ui:VisualElement name="hit-feedback-container" class="hit-feedback-container" picking-mode="Ignore">
+            <ui:Label text="PERFECT" name="perfect-label" class="hit-feedback-label perfect-label" picking-mode="Ignore" />
+            <ui:Label text="GOOD" name="good-label" class="hit-feedback-label good-label" picking-mode="Ignore" />
+            <ui:Label text="MISS" name="miss-label" class="hit-feedback-label miss-label" picking-mode="Ignore" />
+        </ui:VisualElement>
+
         <!-- Bottom bar: Currently Playing and optional Delay -->
         <ui:VisualElement name="hud-bottom-bar" class="hud-bottom-bar" picking-mode="Ignore">
             <ui:Label text="Currently Playing: N" name="current-playing-label" class="hud-info-label" picking-mode="Ignore" />

@@ -36,6 +36,41 @@
     letter-spacing: 1px;
 }
 
+/* ---- HIT FEEDBACK (Perfect / Good / Miss) ---- */
+.hit-feedback-container {
+    position: absolute;
+    top: 35%;
+    left: 0;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.hit-feedback-label {
+    font-size: 64px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    letter-spacing: 2px;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.8s;
+    transition-timing-function: ease-in;
+    position: absolute;
+}
+
+.perfect-label {
+    color: rgb(0, 255, 128);
+}
+
+.good-label {
+    color: rgb(255, 220, 50);
+}
+
+.miss-label {
+    color: rgb(255, 60, 60);
+}
+
 /* ---- BOTTOM BAR (Currently Playing & Delay) ---- */
 .hud-bottom-bar {
     flex-direction: row;
