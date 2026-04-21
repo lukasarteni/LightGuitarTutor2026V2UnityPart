@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 656058fe318eb48558d21d66d1a79a2b, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f79919f81c0814f934dbb94d4c6024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitManager
-  currentPlayingTextUI: {fileID: 885632062}
   music: {fileID: 1818031202}
   spawner: {fileID: 451027246}
   UIManage: {fileID: 1323568325}
@@ -199,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChartGeneratorFromTxt
   chordFile: {fileID: 4900000, guid: 1e4e5c989b29c1b418eead2471b54083, type: 3}
-  CountInTime: 5
+  CountInTime: 10
 --- !u!4 &22091592
 Transform:
   m_ObjectHideFlags: 0
@@ -934,6 +933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoteSpawner
   music: {fileID: 1818031202}
+  startDelay: 5
   laneManager: {fileID: 772600751}
   chartGenerator: {fileID: 22091591}
   spawnAheadTime: 10
@@ -1445,7 +1445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a010b2ec9bd4e64fbb7825b773523f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaneManager
-  scoringPlank: {fileID: 1083381175}
+  scoringPlank: {fileID: 2131611396}
   aTargetPrefab: {fileID: 5105447740105109324, guid: 09565d1b13d2093449caf9032d8ec119, type: 3}
   amTargetPrefab: {fileID: 4291585953608209672, guid: e4fca8092b7534647b8cbe6ab9137719, type: 3}
   bTargetPrefab: {fileID: 4291585953608209672, guid: e7c3dda0f5c94c747bb105cdc0fa8da5, type: 3}
@@ -3123,7 +3123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2131611396}
   m_Layer: 0
-  m_Name: ParticlesParent
+  m_Name: TransformForSpawning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3138,7 +3138,7 @@ Transform:
   m_GameObject: {fileID: 2131611395}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.445, y: 0.596, z: 0.17}
+  m_LocalPosition: {x: -1.01, y: 0.596, z: 0.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3247,6 +3247,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2000911394814419407, guid: 4b0e7453c61f6bb4c86872676989f5f2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898043484487366147, guid: 4b0e7453c61f6bb4c86872676989f5f2, type: 3}
+      propertyPath: Mute
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898043484487366147, guid: 4b0e7453c61f6bb4c86872676989f5f2, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3809420936656695862, guid: 4b0e7453c61f6bb4c86872676989f5f2, type: 3}

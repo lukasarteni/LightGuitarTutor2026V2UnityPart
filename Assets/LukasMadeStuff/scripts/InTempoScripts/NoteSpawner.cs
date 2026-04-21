@@ -4,6 +4,7 @@ using UnityEngine;
 public class NoteSpawner : MonoBehaviour
 {
     public AudioSource music;
+    public double startDelay = 5.0; // seconds
 
     public LaneManager laneManager;
 
@@ -15,23 +16,38 @@ public class NoteSpawner : MonoBehaviour
 
     int nextNote = 0;
 
+    double startTime = 0;
+    double songTime = 0;
+
     void Start()
     {
         notes = chartGenerator.GenerateChart();
 
-        music.Play();
+        startTime = AudioSettings.dspTime + startDelay; // FIXED
+        Debug.Log(startTime + " " + AudioSettings.dspTime + " " + startDelay);
+        music.PlayScheduled(startTime);
     }
 
     void Update()
     {
-        float songTime = music.time;
+        songTime = AudioSettings.dspTime - startTime;
 
-        //while (nextNote < notes.Count && notes[nextNote].time <= songTime + spawnAheadTime)
-        while (nextNote < notes.Count)
+        while (nextNote < notes.Count && notes[nextNote].time <= songTime + spawnAheadTime)
+        //while (nextNote < notes.Count)
         {
             laneManager.SpawnNote(notes[nextNote], songTime);
 
             nextNote++;
         }
+    }
+
+    public double getSongTime()
+    {
+        return songTime;
+    }
+
+    public float getSongTimeFloat()
+    {
+        return (float)songTime;
     }
 }

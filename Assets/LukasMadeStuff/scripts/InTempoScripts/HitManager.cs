@@ -74,14 +74,14 @@ public class HitManager : MonoBehaviour
 
     void cullTheOldNotes()
     {
-        float SongTimeForTargetChecks = music.time - 2.5f;
+        float SongTimeForTargetChecks = spawner.getSongTimeFloat(); //music.time- 2.5f;
 
         while (currentNoteIndex < spawner.notes.Count)
         {
             var note = spawner.notes[currentNoteIndex];
             float timeDiff = note.time - SongTimeForTargetChecks;
 
-            if (timeDiff < (0.5f - goodWindow))
+            if (timeDiff < (-goodWindow +0.25f)) //used to be +0.5f
             {
                 note.hit = true;
                 if (note.obj != null)
@@ -98,7 +98,9 @@ public class HitManager : MonoBehaviour
     void TryHit(string chordSent)
     {
         //IMPORTANT probably need to sync music with visuals by 2.5
-        float SongTimeForTargetChecks = music.time - 2.1f;
+        //        float SongTimeForTargetChecks = music.time - 2.1f;
+        float SongTimeForTargetChecks = spawner.getSongTimeFloat(); // music.time; //- 2.1f;
+
         UIManage.UpdateTheCurrentPlayingTextOnUI(chordSent + " " + SongTimeForTargetChecks); //changelater
 
         NoteData target = null;
@@ -155,14 +157,14 @@ public class HitManager : MonoBehaviour
         if (error <= perfectWindow)
         {
             correctlyHitNotesNumber++;
-            Debug.Log("PERFECT " + chordSent + " " + error);
+            Debug.Log("PERFECT " + chordSent + " " + error + " " + target.time);
             target.hit = true;
             UIManage.ShowThePerfectHit();
         }
         else if (error <= goodWindow)
         {
-            correctlyHitNotesNumber += 0.9f;
-            Debug.Log("GOOD " + chordSent + " " + error);
+            correctlyHitNotesNumber += 0.8f;
+            Debug.Log("GOOD " + chordSent + " " + error + " " + target.time);
             target.hit = true;
             UIManage.ShowTheGoodHit();
         }

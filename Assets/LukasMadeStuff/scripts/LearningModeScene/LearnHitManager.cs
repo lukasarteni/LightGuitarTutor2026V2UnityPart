@@ -10,6 +10,7 @@ public class LearnHitManager : MonoBehaviour
     public AudioSource music;
     public LearnNoteSpawner spawner;
     public UIManager UIManage;
+
     //public TargetMover targetMover;
 
     public float perfectWindow = 1f;
@@ -26,7 +27,7 @@ public class LearnHitManager : MonoBehaviour
     void Update()
     {
         if (!isPaused)
-            cullTheOldNotes();
+            CullTheNotesThatHaveReachedTimecurrent();
 
         UpdateTheAccuracyAndScore();
 
@@ -71,7 +72,9 @@ public class LearnHitManager : MonoBehaviour
             if (spawner.notes[i].obj != null)
                 spawner.notes[i].obj.GetComponent<NoteScroller>()?.FreezeAllThisNote();
         }
-        GuitarMap3dModelParentWithTargetMoverScript.GetComponent<TargetMover>()?.FreezeAllThisNote();
+        GuitarMap3dModelParentWithTargetMoverScript
+            .GetComponent<TargetMover>()
+            ?.FreezeAllThisNote();
     }
 
     void Unpause()
@@ -85,8 +88,9 @@ public class LearnHitManager : MonoBehaviour
             if (spawner.notes[i].obj != null)
                 spawner.notes[i].obj.GetComponent<NoteScroller>()?.UnfreezeAllThisNote();
         }
-        GuitarMap3dModelParentWithTargetMoverScript.GetComponent<TargetMover>()?.UnfreezeAllThisNote();
-
+        GuitarMap3dModelParentWithTargetMoverScript
+            .GetComponent<TargetMover>()
+            ?.UnfreezeAllThisNote();
     }
 
     void UpdateTheAccuracyAndScore()
@@ -103,16 +107,16 @@ public class LearnHitManager : MonoBehaviour
         }
     }
 
-    void cullTheOldNotes()
+    void CullTheNotesThatHaveReachedTimecurrent()
     {
-        float SongTimeForTargetChecks = music.time - 2.5f;
+        float SongTimeForTargetChecks = music.time ;//- 2.5f;
 
         while (currentNoteIndex < spawner.notes.Count)
         {
             var note = spawner.notes[currentNoteIndex];
             float timeDiff = note.time - SongTimeForTargetChecks;
 
-            if (timeDiff < 0 + zeroingTheCenterPieceDistance)
+            if (timeDiff < 0) //+ zeroingTheCenterPieceDistance)
             {
                 note.hit = true;
 
@@ -153,7 +157,7 @@ public class LearnHitManager : MonoBehaviour
             return;
         }
 
-        float SongTimeForTargetChecks = music.time - 2.1f;
+        float SongTimeForTargetChecks = music.time; //- 2.1f;
         UIManage.UpdateTheCurrentPlayingTextOnUI(chordSent + " " + SongTimeForTargetChecks);
 
         NoteData target = null;
@@ -200,7 +204,6 @@ public class LearnHitManager : MonoBehaviour
             target.hit = true;
             UIManage.ShowTheGoodHit();
         }
-
 
         if (target.obj != null)
             Destroy(target.obj);
