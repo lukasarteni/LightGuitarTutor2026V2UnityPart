@@ -211,7 +211,7 @@ public class LearnHitManager : MonoBehaviour
         }
         else if (error <= goodWindow)
         {
-            correctlyHitNotesNumber += 0.9f;
+            correctlyHitNotesNumber += 0.8f;
             Debug.Log("GOOD " + chordSent + " " + error);
             target.hit = true;
             UIManage.ShowTheGoodHit();
