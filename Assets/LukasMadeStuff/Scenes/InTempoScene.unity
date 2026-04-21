@@ -934,10 +934,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoteSpawner
   music: {fileID: 1818031202}
-  startDelay: 10
+  startDelay: 10.5
   laneManager: {fileID: 772600751}
   chartGenerator: {fileID: 22091591}
-  spawnAheadTime: 10.5
+  spawnAheadTime: 10
   notes: []
 --- !u!4 &451027247
 Transform:
