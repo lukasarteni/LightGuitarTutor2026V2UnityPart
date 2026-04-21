@@ -15,6 +15,9 @@ public class HitManager : MonoBehaviour
     public float goodWindow = 2f;
     int currentNoteIndex = 0;
     float correctlyHitNotesNumber = 0f;
+    bool isPaused = false;
+    double pauseDspTime = 0;
+    public GameObject GuitarMap3dModelParentWithTargetMoverScript;
 
     void Update()
     {
@@ -50,6 +53,43 @@ public class HitManager : MonoBehaviour
             TryHit("Gm");
     }
 
+    public void PauseScreenPause()
+    {
+        isPaused = true;
+        //pendingNote = note;
+        music.Pause();
+        pauseDspTime = AudioSettings.dspTime;
+
+        for (int i = 0; i < spawner.notes.Count; i++)
+        {
+            if (spawner.notes[i].obj != null)
+                spawner.notes[i].obj.GetComponent<NoteScroller>()?.FreezeAllThisNote();
+        }
+        GuitarMap3dModelParentWithTargetMoverScript
+            .GetComponent<TargetMover>()
+            ?.FreezeAllThisNote();
+    }
+
+    public void PauseScreenUnpause()
+    {
+        isPaused = false;
+        //pendingNote = null;
+        music.UnPause();
+        double pausedDuration = AudioSettings.dspTime - pauseDspTime;
+
+        // Shift startTime forward so songTime stays continuous
+        spawner.addToStartTime(pausedDuration);
+
+        for (int i = 0; i < spawner.notes.Count; i++)
+        {
+            if (spawner.notes[i].obj != null)
+                spawner.notes[i].obj.GetComponent<NoteScroller>()?.UnfreezeAllThisNote();
+        }
+        GuitarMap3dModelParentWithTargetMoverScript
+            .GetComponent<TargetMover>()
+            ?.UnfreezeAllThisNote();
+    }
+
     void UpdateTheAccuracyAndScore()
     {
         if (correctlyHitNotesNumber == 0)
@@ -81,7 +121,7 @@ public class HitManager : MonoBehaviour
             var note = spawner.notes[currentNoteIndex];
             float timeDiff = note.time - SongTimeForTargetChecks;
 
-            if (timeDiff < (-goodWindow +0.25f)) //used to be +0.5f
+            if (timeDiff < (-goodWindow + 0.25f)) //used to be +0.5f
             {
                 note.hit = true;
                 if (note.obj != null)
@@ -95,7 +135,7 @@ public class HitManager : MonoBehaviour
         }
     }
 
-    void TryHit(string chordSent)
+    public void TryHit(string chordSent)
     {
         //IMPORTANT probably need to sync music with visuals by 2.5
         //        float SongTimeForTargetChecks = music.time - 2.1f;

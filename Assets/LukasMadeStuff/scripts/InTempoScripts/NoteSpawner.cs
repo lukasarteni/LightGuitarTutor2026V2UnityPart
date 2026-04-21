@@ -50,5 +50,9 @@ public class NoteSpawner : MonoBehaviour
     {
         return (float)songTime;
     }
-    
+
+    public void addToStartTime(double addingtime)
+    {
+        startTime += addingtime;
+    }
 }
