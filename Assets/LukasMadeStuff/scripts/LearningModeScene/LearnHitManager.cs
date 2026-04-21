@@ -15,13 +15,15 @@ public class LearnHitManager : MonoBehaviour
 
     public float perfectWindow = 1f;
     public float goodWindow = 2f;
-    public float zeroingTheCenterPieceDistance = 0.5f;
+
+    //public float zeroingTheCenterPieceDistance = 0.5f;
     public GameObject GuitarMap3dModelParentWithTargetMoverScript;
 
     int currentNoteIndex = 0;
     float correctlyHitNotesNumber = 0f;
 
     bool isPaused = false;
+    double pauseDspTime = 0;
     NoteData pendingNote = null;
 
     void Update()
@@ -60,12 +62,16 @@ public class LearnHitManager : MonoBehaviour
         if (Keyboard.current.uKey.wasPressedThisFrame)
             TryHit("Gm");
     }
-
+    public Boolean areWePaused()
+    {
+        return isPaused;
+    }
     void PauseForInput(NoteData note)
     {
         isPaused = true;
         pendingNote = note;
         music.Pause();
+        pauseDspTime = AudioSettings.dspTime;
 
         for (int i = 0; i < spawner.notes.Count; i++)
         {
@@ -81,7 +87,13 @@ public class LearnHitManager : MonoBehaviour
     {
         isPaused = false;
         pendingNote = null;
-        music.Play();
+        music.UnPause();
+        double pausedDuration = AudioSettings.dspTime - pauseDspTime;
+
+        // Shift startTime forward so songTime stays continuous
+        spawner.addToStartTime(pausedDuration);
+
+        
 
         for (int i = 0; i < spawner.notes.Count; i++)
         {
@@ -109,7 +121,7 @@ public class LearnHitManager : MonoBehaviour
 
     void CullTheNotesThatHaveReachedTimecurrent()
     {
-        float SongTimeForTargetChecks = music.time ;//- 2.5f;
+        float SongTimeForTargetChecks = spawner.getSongTimeFloat(); //- 2.5f;
 
         while (currentNoteIndex < spawner.notes.Count)
         {
@@ -157,7 +169,7 @@ public class LearnHitManager : MonoBehaviour
             return;
         }
 
-        float SongTimeForTargetChecks = music.time; //- 2.1f;
+        float SongTimeForTargetChecks = spawner.getSongTimeFloat(); //- 2.1f;
         UIManage.UpdateTheCurrentPlayingTextOnUI(chordSent + " " + SongTimeForTargetChecks);
 
         NoteData target = null;

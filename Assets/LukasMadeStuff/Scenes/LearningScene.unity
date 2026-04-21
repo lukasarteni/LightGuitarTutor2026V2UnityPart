@@ -153,7 +153,6 @@ MonoBehaviour:
   UIManage: {fileID: 1323568325}
   perfectWindow: 1
   goodWindow: 2
-  zeroingTheCenterPieceDistance: 0.5
   GuitarMap3dModelParentWithTargetMoverScript: {fileID: 1376547797}
 --- !u!4 &92355674
 Transform:
@@ -1269,7 +1268,9 @@ MonoBehaviour:
   music: {fileID: 1818031202}
   laneManager: {fileID: 1081287218}
   chartGenerator: {fileID: 1762023031}
+  hitManager1: {fileID: 92355673}
   spawnAheadTime: 10
+  startDelay: 5
   notes: []
 --- !u!4 &736249142
 Transform:
@@ -2831,7 +2832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LearnChartGeneratorFromTxt
   chordFile: {fileID: 4900000, guid: 1e4e5c989b29c1b418eead2471b54083, type: 3}
-  CountInTime: 5
+  CountInTime: 10
 --- !u!4 &1762023032
 Transform:
   m_ObjectHideFlags: 0
@@ -3287,6 +3288,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2000911394814419407, guid: 4b0e7453c61f6bb4c86872676989f5f2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898043484487366147, guid: 4b0e7453c61f6bb4c86872676989f5f2, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3809420936656695862, guid: 4b0e7453c61f6bb4c86872676989f5f2, type: 3}

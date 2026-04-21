@@ -6,7 +6,7 @@ using UnityEngine;
 public class LearnChartGeneratorFromTxt : MonoBehaviour
 {
     public TextAsset chordFile; // drag your .txt file here in Unity
-    public float CountInTime = 5f;
+    public float CountInTime = 10f;
 
     public List<NoteData> GenerateChart()
     {

@@ -50,15 +50,15 @@ public class TestLaneManager : MonoBehaviour
         };
     }
 
-    public GameObject SpawnNote(NoteData note, float songTime)
+    public GameObject SpawnNote(NoteData note, double songTime)
     {
         GameObject prefab = prefabMap[note.chord];
 
-        float timeUntilHit = note.time - songTime;
+        double timeUntilHit = note.time - songTime;
 
-        float xOffset = timeUntilHit * scrollSpeed;
+        double xOffset = timeUntilHit * scrollSpeed;
 
-        Vector3 spawnPos = new Vector3(scoringPlank.position.x + xOffset, fixedY, fixedZ);
+        Vector3 spawnPos = new Vector3(scoringPlank.position.x + (float)xOffset, fixedY, fixedZ);
         GameObject obj;
         if (prefab == null)
             obj = Instantiate(NullTargetPrefab, spawnPos, Quaternion.identity);

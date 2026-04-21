@@ -8,30 +8,57 @@ public class LearnNoteSpawner : MonoBehaviour
     public TestLaneManager laneManager;
 
     public LearnChartGeneratorFromTxt chartGenerator;
+    public LearnHitManager hitManager1;
 
     public float spawnAheadTime = 10f;
+
+    public double startDelay = 5.0; // seconds
 
     public List<NoteData> notes;
 
     int nextNote = 0;
 
+    double startTime = 0;
+    double songTime = 0;
+
     void Start()
     {
         notes = chartGenerator.GenerateChart();
 
-        music.Play();
+        startTime = AudioSettings.dspTime + startDelay; // FIXED
+        Debug.Log(startTime + " " + AudioSettings.dspTime + " " + startDelay);
+        music.PlayScheduled(startTime);
     }
 
     void Update()
     {
-        float songTime = music.time;
+        songTime = AudioSettings.dspTime - startTime;
 
-        //while (nextNote < notes.Count && notes[nextNote].time <= songTime + spawnAheadTime)
-        while (nextNote < notes.Count)
+        while (
+            !hitManager1.areWePaused()
+            && nextNote < notes.Count
+            && notes[nextNote].time <= songTime + spawnAheadTime
+        )
+        //while (nextNote < notes.Count)
         {
             laneManager.SpawnNote(notes[nextNote], songTime);
 
             nextNote++;
         }
+    }
+
+    public double getSongTime()
+    {
+        return songTime;
+    }
+
+    public float getSongTimeFloat()
+    {
+        return (float)songTime;
+    }
+
+    public void addToStartTime(double addingtime)
+    {
+        startTime += addingtime;
     }
 }
