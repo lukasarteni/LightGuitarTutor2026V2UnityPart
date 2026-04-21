@@ -1,25 +1,35 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class HitManager : MonoBehaviour
+public class LearnHitManager : MonoBehaviour
 {
     public AudioSource music;
-
-    public NoteSpawner spawner;
+    public LearnNoteSpawner spawner;
     public UIManager UIManage;
+    public TargetMover targetMover;
 
     public float perfectWindow = 1f;
     public float goodWindow = 2f;
+    public float zeroingTheCenterPieceDistance = 0.5f;
+    public GameObject GuitarMap3dModel;
+
     int currentNoteIndex = 0;
     float correctlyHitNotesNumber = 0f;
 
+    bool isPaused = false;
+    NoteData pendingNote = null;
+
     void Update()
     {
-        cullTheOldNotes();
+        if (!isPaused)
+            cullTheOldNotes();
+
         UpdateTheAccuracyAndScore();
+
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
             TryHit("A");
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
@@ -50,20 +60,41 @@ public class HitManager : MonoBehaviour
             TryHit("Gm");
     }
 
+    void PauseForInput(NoteData note)
+    {
+        isPaused = true;
+        pendingNote = note;
+        music.Pause();
+
+        for (int i = 0; i < spawner.notes.Count; i++)
+        {
+            if (spawner.notes[i].obj != null)
+                spawner.notes[i].obj.GetComponent<NoteScroller>()?.FreezeAllThisNote();
+        }
+        GuitarMap3dModel.GetComponent<TargetMover>()?.FreezeAllThisNote();
+    }
+
+    void Unpause()
+    {
+        isPaused = false;
+        pendingNote = null;
+        music.Play();
+
+        for (int i = 0; i < spawner.notes.Count; i++)
+        {
+            if (spawner.notes[i].obj != null)
+                spawner.notes[i].obj.GetComponent<NoteScroller>()?.UnfreezeAllThisNote();
+        }
+        GuitarMap3dModel.GetComponent<TargetMover>()?.UnfreezeAllThisNote();
+
+    }
+
     void UpdateTheAccuracyAndScore()
     {
         if (correctlyHitNotesNumber == 0)
         {
             UIManage.UpdateThePointTextOnUI(0);
-
-            if (currentNoteIndex == 0)
-            {
-                UIManage.UpdateTheAccuracyTextOnUI(100);
-            }
-            else
-            {
-                UIManage.UpdateTheAccuracyTextOnUI(0);
-            }
+            UIManage.UpdateTheAccuracyTextOnUI(currentNoteIndex == 0 ? 100 : 0);
         }
         else
         {
@@ -81,14 +112,14 @@ public class HitManager : MonoBehaviour
             var note = spawner.notes[currentNoteIndex];
             float timeDiff = note.time - SongTimeForTargetChecks;
 
-            if (timeDiff < (0.5f - goodWindow))
+            if (timeDiff < 0 + zeroingTheCenterPieceDistance)
             {
                 note.hit = true;
-                if (note.obj != null)
-                    Destroy(note.obj);
-                Debug.Log("MISS (too late): " + note.chord);
+
                 currentNoteIndex++;
-                UIManage.ShowTheMissHit();
+                Debug.Log("PAUSING for chord: " + note.chord);
+                PauseForInput(note);
+                //UIManage.ShowTheMissHit();
             }
             else
                 break;
@@ -97,31 +128,36 @@ public class HitManager : MonoBehaviour
 
     void TryHit(string chordSent)
     {
-        //IMPORTANT probably need to sync music with visuals by 2.5
-        float SongTimeForTargetChecks = music.time - 2.1f;
-        UIManage.UpdateTheCurrentPlayingTextOnUI(chordSent + " " + SongTimeForTargetChecks); //changelater
-
-        NoteData target = null;
-        /*
-        // Step 1: Advance index past missed notes
-        while (currentNoteIndex < spawner.notes.Count)
+        if (isPaused)
         {
-            var note = spawner.notes[currentNoteIndex];
-            float timeDiff = note.time - SongTimeForTargetChecks;
-
-            if (timeDiff < -goodWindow)
+            if (pendingNote != null && chordSent == pendingNote.chord)
             {
-                note.hit = true;
-                if (note.obj != null)
-                    Destroy(note.obj);
-                Debug.Log("MISS (too late): " + note.chord);
-                currentNoteIndex++;
+                correctlyHitNotesNumber++;
+                Debug.Log("CORRECT (after pause): " + chordSent);
+                pendingNote.hit = true;
+                if (pendingNote.obj != null)
+                    Destroy(pendingNote.obj);
+                UIManage.ShowThePerfectHit();
+
+                while (
+                    currentNoteIndex < spawner.notes.Count && spawner.notes[currentNoteIndex].hit
+                )
+                    currentNoteIndex++;
+
+                Unpause();
             }
             else
-                break;
+            {
+                Debug.Log("WRONG chord while paused, still waiting for: " + pendingNote?.chord);
+            }
+            return;
         }
-        */
-        // Step 2: Search a small window ahead (with bounds check)
+
+        float SongTimeForTargetChecks = music.time - 2.1f;
+        UIManage.UpdateTheCurrentPlayingTextOnUI(chordSent + " " + SongTimeForTargetChecks);
+
+        NoteData target = null;
+
         for (
             int i = currentNoteIndex;
             i < Mathf.Min(currentNoteIndex + 5, spawner.notes.Count);
@@ -129,7 +165,6 @@ public class HitManager : MonoBehaviour
         )
         {
             var note = spawner.notes[i];
-
             if (note.hit)
                 continue;
 
@@ -149,7 +184,6 @@ public class HitManager : MonoBehaviour
             return;
         }
 
-        // Step 3: Evaluate timing
         float error = Mathf.Abs(SongTimeForTargetChecks - target.time);
 
         if (error <= perfectWindow)
@@ -166,19 +200,12 @@ public class HitManager : MonoBehaviour
             target.hit = true;
             UIManage.ShowTheGoodHit();
         }
-        else
-        {
-            Debug.Log("MISS");
-            return;
-        }
+
 
         if (target.obj != null)
             Destroy(target.obj);
 
-        // Advance past all consumed (hit) notes
         while (currentNoteIndex < spawner.notes.Count && spawner.notes[currentNoteIndex].hit)
-        {
             currentNoteIndex++;
-        }
     }
 }

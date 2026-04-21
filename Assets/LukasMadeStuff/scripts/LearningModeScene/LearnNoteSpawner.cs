@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeNoteSpawner : MonoBehaviour
+public class LearnNoteSpawner : MonoBehaviour
 {
     public AudioSource music;
 
-    public LaneManager laneManager;
+    public TestLaneManager laneManager;
 
-    public ChartGeneratorFromTxt chartGenerator;
+    public LearnChartGeneratorFromTxt chartGenerator;
 
     public float spawnAheadTime = 10f;
 
@@ -26,8 +26,8 @@ public class TimeNoteSpawner : MonoBehaviour
     {
         float songTime = music.time;
 
-        while (nextNote < notes.Count &&
-               notes[nextNote].time <= songTime + spawnAheadTime)
+        //while (nextNote < notes.Count && notes[nextNote].time <= songTime + spawnAheadTime)
+        while (nextNote < notes.Count)
         {
             laneManager.SpawnNote(notes[nextNote], songTime);
 

@@ -2095,7 +2095,7 @@ GameObject:
   - component: {fileID: 1083381177}
   - component: {fileID: 1083381178}
   m_Layer: 0
-  m_Name: scoring_plank
+  m_Name: scoring_plank_positiontransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

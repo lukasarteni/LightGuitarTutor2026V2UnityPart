@@ -13,4 +13,14 @@ public class NoteScroller : MonoBehaviour
 
         transform.position = new Vector3(transform.position.x, fixedY, fixedZ);
     }
+
+    public void FreezeAllThisNote()
+    {
+        speed = 0f;
+    }
+
+    public void UnfreezeAllThisNote()
+    {
+        speed = 5f;
+    }
 }
