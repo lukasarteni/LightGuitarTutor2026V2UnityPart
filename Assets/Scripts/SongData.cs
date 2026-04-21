@@ -8,4 +8,6 @@ public class SongData : ScriptableObject
     public string duration;
     public Difficulty difficulty;
     public AudioClip clip;
+    public TextAsset chart;
+
 }
