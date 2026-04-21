@@ -1,0 +1,24 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ui="UnityEngine.UIElements"
+         noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
+         editor-extension-mode="False">
+
+    <Style src="project://database/Assets/UI%20Toolkit/GameHudStyle.uss" />
+
+    <ui:VisualElement name="hud-root" class="hud-root" picking-mode="Ignore">
+
+        <!-- Top bar: Accuracy and Score -->
+        <ui:VisualElement name="hud-top-bar" class="hud-top-bar" picking-mode="Ignore">
+            <ui:Label text="Accuracy: 100%" name="accuracy-label" class="hud-stat-label" picking-mode="Ignore" />
+            <ui:Label text="Score: 0" name="score-label" class="hud-stat-label" picking-mode="Ignore" />
+        </ui:VisualElement>
+
+        <!-- Bottom bar: Currently Playing and optional Delay -->
+        <ui:VisualElement name="hud-bottom-bar" class="hud-bottom-bar" picking-mode="Ignore">
+            <ui:Label text="Currently Playing: N" name="current-playing-label" class="hud-info-label" picking-mode="Ignore" />
+            <ui:Label text="Delay: 0ms" name="delay-label" class="hud-info-label" picking-mode="Ignore" />
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

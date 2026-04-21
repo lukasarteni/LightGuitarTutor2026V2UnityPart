@@ -10,12 +10,12 @@ public class LearnHitManager : MonoBehaviour
     public AudioSource music;
     public LearnNoteSpawner spawner;
     public UIManager UIManage;
-    public TargetMover targetMover;
+    //public TargetMover targetMover;
 
     public float perfectWindow = 1f;
     public float goodWindow = 2f;
     public float zeroingTheCenterPieceDistance = 0.5f;
-    public GameObject GuitarMap3dModel;
+    public GameObject GuitarMap3dModelParentWithTargetMoverScript;
 
     int currentNoteIndex = 0;
     float correctlyHitNotesNumber = 0f;
@@ -71,7 +71,7 @@ public class LearnHitManager : MonoBehaviour
             if (spawner.notes[i].obj != null)
                 spawner.notes[i].obj.GetComponent<NoteScroller>()?.FreezeAllThisNote();
         }
-        GuitarMap3dModel.GetComponent<TargetMover>()?.FreezeAllThisNote();
+        GuitarMap3dModelParentWithTargetMoverScript.GetComponent<TargetMover>()?.FreezeAllThisNote();
     }
 
     void Unpause()
@@ -85,7 +85,7 @@ public class LearnHitManager : MonoBehaviour
             if (spawner.notes[i].obj != null)
                 spawner.notes[i].obj.GetComponent<NoteScroller>()?.UnfreezeAllThisNote();
         }
-        GuitarMap3dModel.GetComponent<TargetMover>()?.UnfreezeAllThisNote();
+        GuitarMap3dModelParentWithTargetMoverScript.GetComponent<TargetMover>()?.UnfreezeAllThisNote();
 
     }
 

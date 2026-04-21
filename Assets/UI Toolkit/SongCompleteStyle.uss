@@ -1,0 +1,140 @@
+/* ===================================================
+   LIGHT GUITAR TUTOR — Song Complete Screen USS
+   Matches dark game UI aesthetic
+   =================================================== */
+
+/* ---- FULL-SCREEN OVERLAY ---- */
+.song-complete-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(10, 10, 16, 0.90);
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---- MAIN PANEL ---- */
+.song-complete-panel {
+    width: 500px;
+    padding: 48px 44px;
+    border-radius: 18px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.10);
+    background-color: rgba(24, 24, 36, 1);
+    align-items: center;
+}
+
+/* ---- TITLE ---- */
+.complete-title {
+    color: rgb(100, 220, 130);
+    font-size: 40px;
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+}
+
+/* ---- SONG INFO ---- */
+.complete-song-info {
+    color: rgb(180, 180, 200);
+    font-size: 18px;
+    -unity-font-style: italic;
+    -unity-text-align: upper-center;
+    margin-bottom: 28px;
+}
+
+/* ---- STATS CONTAINER ---- */
+.stats-container {
+    width: 100%;
+    padding: 16px 24px;
+    margin-bottom: 28px;
+    border-radius: 12px;
+    background-color: rgba(16, 16, 26, 0.8);
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+.stat-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 6px 0;
+}
+
+.stat-label {
+    color: rgb(160, 160, 180);
+    font-size: 18px;
+    -unity-font-style: bold;
+}
+
+.stat-value {
+    color: rgb(230, 230, 240);
+    font-size: 20px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-right;
+}
+
+/* ---- BUTTONS ---- */
+.complete-buttons {
+    align-items: center;
+    width: 100%;
+}
+
+.complete-button {
+    width: 300px;
+    height: 56px;
+    font-size: 20px;
+    -unity-font-style: bold;
+    border-radius: 12px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.12);
+    background-color: rgba(40, 40, 56, 1);
+    color: rgb(210, 210, 220);
+    margin: 8px 0;
+    transition-duration: 0.15s;
+}
+
+.complete-button:hover {
+    background-color: rgba(60, 60, 80, 1);
+    border-color: rgba(255, 255, 255, 0.3);
+    scale: 1.04;
+}
+
+.complete-button:active {
+    background-color: rgba(30, 30, 46, 1);
+    scale: 0.97;
+}
+
+.complete-success {
+    background-color: rgba(40, 160, 80, 1);
+    border-color: rgba(80, 200, 120, 0.4);
+    color: rgb(255, 255, 255);
+}
+
+.complete-success:hover {
+    background-color: rgba(55, 185, 95, 1);
+    border-color: rgba(100, 220, 140, 0.6);
+}
+
+.complete-primary {
+    background-color: rgba(56, 120, 255, 1);
+    border-color: rgba(100, 160, 255, 0.4);
+    color: rgb(255, 255, 255);
+}
+
+.complete-primary:hover {
+    background-color: rgba(80, 140, 255, 1);
+    border-color: rgba(130, 180, 255, 0.6);
+}
+
+.complete-danger {
+    background-color: rgba(180, 50, 50, 0.85);
+    border-color: rgba(220, 80, 80, 0.4);
+    color: rgb(255, 220, 220);
+}
+
+.complete-danger:hover {
+    background-color: rgba(210, 60, 60, 1);
+}
