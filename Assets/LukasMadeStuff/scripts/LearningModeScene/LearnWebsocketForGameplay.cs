@@ -1,10 +1,11 @@
-using UnityEngine;
-using NativeWebSocket;
 using System.Text;
+using NativeWebSocket;
+using UnityEngine;
 
-public class Connection : MonoBehaviour
+public class LearnWebsocketForGameplay : MonoBehaviour
 {
     WebSocket websocket;
+    public LearnHitManager hitManager;
 
     async void Start()
     {
@@ -29,8 +30,20 @@ public class Connection : MonoBehaviour
 
         websocket.OnMessage += (bytes) =>
         {
-            string message = Encoding.UTF8.GetString(bytes);
-            Debug.Log("Received from Python: " + message);
+            string rawMessage = Encoding.UTF8.GetString(bytes).Trim();
+
+            Debug.Log("Received from Python: " + rawMessage);
+
+            // Normalize input (important!)
+            string chord = rawMessage;
+
+            // Validate before sending
+            if (chord!= null) 
+                hitManager.TryHit(chord);
+            else
+            {
+                Debug.LogWarning("Invalid chord received: " + rawMessage);
+            }
         };
 
         await websocket.Connect();
@@ -54,8 +67,6 @@ public class Connection : MonoBehaviour
         websocket?.DispatchMessageQueue();
 #endif
     }
-
-
 
     // methods
 

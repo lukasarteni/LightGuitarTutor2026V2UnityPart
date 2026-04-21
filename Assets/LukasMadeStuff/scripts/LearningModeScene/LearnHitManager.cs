@@ -62,10 +62,48 @@ public class LearnHitManager : MonoBehaviour
         if (Keyboard.current.uKey.wasPressedThisFrame)
             TryHit("Gm");
     }
+
     public Boolean areWePaused()
     {
         return isPaused;
     }
+
+    public void PauseScreenPause()
+    {
+        isPaused = true;
+        //pendingNote = note;
+        music.Pause();
+        pauseDspTime = AudioSettings.dspTime;
+
+        for (int i = 0; i < spawner.notes.Count; i++)
+        {
+            if (spawner.notes[i].obj != null)
+                spawner.notes[i].obj.GetComponent<NoteScroller>()?.FreezeAllThisNote();
+        }
+        GuitarMap3dModelParentWithTargetMoverScript
+            .GetComponent<TargetMover>()
+            ?.FreezeAllThisNote();
+    }
+    public void PauseScreenUnpause()
+    {
+        isPaused = false;
+        //pendingNote = null;
+        music.UnPause();
+        double pausedDuration = AudioSettings.dspTime - pauseDspTime;
+
+        // Shift startTime forward so songTime stays continuous
+        spawner.addToStartTime(pausedDuration);
+
+        for (int i = 0; i < spawner.notes.Count; i++)
+        {
+            if (spawner.notes[i].obj != null)
+                spawner.notes[i].obj.GetComponent<NoteScroller>()?.UnfreezeAllThisNote();
+        }
+        GuitarMap3dModelParentWithTargetMoverScript
+            .GetComponent<TargetMover>()
+            ?.UnfreezeAllThisNote();
+    }
+
     void PauseForInput(NoteData note)
     {
         isPaused = true;
@@ -92,8 +130,6 @@ public class LearnHitManager : MonoBehaviour
 
         // Shift startTime forward so songTime stays continuous
         spawner.addToStartTime(pausedDuration);
-
-        
 
         for (int i = 0; i < spawner.notes.Count; i++)
         {
@@ -142,7 +178,7 @@ public class LearnHitManager : MonoBehaviour
         }
     }
 
-    void TryHit(string chordSent)
+    public void TryHit(string chordSent)
     {
         if (isPaused)
         {
