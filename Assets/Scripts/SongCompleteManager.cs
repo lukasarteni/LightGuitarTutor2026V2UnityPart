@@ -14,8 +14,8 @@ public class SongCompleteManager : MonoBehaviour
     [Tooltip("The AudioSource playing the song. If left null, the script will search the scene.")]
     public AudioSource musicSource;
 
-    [Tooltip("Reference to the PauseManager so we can disable pausing when the song ends.")]
-    public PauseManager pauseManager;
+    [Tooltip("Reference to the pause manager GameObject so we can disable pausing when the song ends.")]
+    public MonoBehaviour pauseManagerComponent;
 
     [Tooltip("Reference to the GameHudManager to read final stats.")]
     public GameHudManager gameHudManager;
@@ -70,10 +70,12 @@ public class SongCompleteManager : MonoBehaviour
                 musicSource = audioGO.GetComponent<AudioSource>();
         }
 
-        // Try to find PauseManager if not assigned
-        if (pauseManager == null)
+        // Try to find a pause manager if not assigned
+        if (pauseManagerComponent == null)
         {
-            pauseManager = FindAnyObjectByType<PauseManager>();
+            pauseManagerComponent = FindAnyObjectByType<InTempoPauseManager>();
+            if (pauseManagerComponent == null)
+                pauseManagerComponent = FindAnyObjectByType<LearningPauseManager>();
         }
 
         // Try to find GameHudManager if not assigned
@@ -127,8 +129,8 @@ public class SongCompleteManager : MonoBehaviour
         Time.timeScale = 0f;
 
         // Disable the pause manager so ESC doesn't open pause menu
-        if (pauseManager != null)
-            pauseManager.enabled = false;
+        if (pauseManagerComponent != null)
+            pauseManagerComponent.enabled = false;
 
         // Populate song info
         if (GameManager.Instance != null && GameManager.Instance.selectedSong != null)

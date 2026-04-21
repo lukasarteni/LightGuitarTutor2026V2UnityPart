@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MainMenu.unity
+    path: Assets/LukasMadeStuff/Scenes/MainMenu.unity
     guid: 89a96749bb2d4bd4286ed0692e51b6b2
   - enabled: 1
     path: Assets/LukasMadeStuff/Scenes/InTempoScene.unity

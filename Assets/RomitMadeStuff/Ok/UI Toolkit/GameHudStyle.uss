@@ -1,0 +1,57 @@
+/* ===================================================
+   LIGHT GUITAR TUTOR — Game HUD USS
+   In-game heads-up display overlay
+   Matches dark game UI aesthetic
+   =================================================== */
+
+/* ---- ROOT CONTAINER ---- */
+.hud-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    /* No background — transparent overlay */
+}
+
+/* ---- TOP BAR (Score & Accuracy) ---- */
+.hud-top-bar {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    left: 500px;
+    right: 500px;
+    height: 60px;
+}
+
+.hud-stat-label {
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    margin: 0 36px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    letter-spacing: 1px;
+}
+
+/* ---- BOTTOM BAR (Currently Playing & Delay) ---- */
+.hud-bottom-bar {
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    height: 85px;
+}
+
+.hud-info-label {
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-left;
+    margin: 0 38px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    letter-spacing: 1px;
+}
