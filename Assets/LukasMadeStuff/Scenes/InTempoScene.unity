@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChartGeneratorFromTxt
   chordFile: {fileID: 4900000, guid: 1e4e5c989b29c1b418eead2471b54083, type: 3}
-  CountInTime: 10
+  CountInTime: 0
 --- !u!4 &22091592
 Transform:
   m_ObjectHideFlags: 0
@@ -934,10 +934,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoteSpawner
   music: {fileID: 1818031202}
-  startDelay: 5
+  startDelay: 10
   laneManager: {fileID: 772600751}
   chartGenerator: {fileID: 22091591}
-  spawnAheadTime: 10
+  spawnAheadTime: 10.5
   notes: []
 --- !u!4 &451027247
 Transform:

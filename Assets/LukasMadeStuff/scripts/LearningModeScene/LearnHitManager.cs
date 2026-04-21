@@ -84,6 +84,7 @@ public class LearnHitManager : MonoBehaviour
             .GetComponent<TargetMover>()
             ?.FreezeAllThisNote();
     }
+
     public void PauseScreenUnpause()
     {
         isPaused = false;
@@ -180,6 +181,9 @@ public class LearnHitManager : MonoBehaviour
 
     public void TryHit(string chordSent)
     {
+        float SongTimeForTargetChecks = spawner.getSongTimeFloat(); //- 2.1f;
+        UIManage.UpdateTheCurrentPlayingTextOnUI(chordSent + " " + SongTimeForTargetChecks);
+
         if (isPaused)
         {
             if (pendingNote != null && chordSent == pendingNote.chord)
@@ -204,9 +208,6 @@ public class LearnHitManager : MonoBehaviour
             }
             return;
         }
-
-        float SongTimeForTargetChecks = spawner.getSongTimeFloat(); //- 2.1f;
-        UIManage.UpdateTheCurrentPlayingTextOnUI(chordSent + " " + SongTimeForTargetChecks);
 
         NoteData target = null;
 

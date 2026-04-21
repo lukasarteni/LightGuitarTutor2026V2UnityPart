@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Melanchall.DryWetMidi.Interaction;
 using UnityEngine;
 
 public class LearnNoteSpawner : MonoBehaviour
@@ -12,7 +13,7 @@ public class LearnNoteSpawner : MonoBehaviour
 
     public float spawnAheadTime = 10f;
 
-    public double startDelay = 5.0; // seconds
+    public double startDelay = 10; // seconds
 
     public List<NoteData> notes;
 
@@ -42,6 +43,7 @@ public class LearnNoteSpawner : MonoBehaviour
         //while (nextNote < notes.Count)
         {
             laneManager.SpawnNote(notes[nextNote], songTime);
+            //Debug.Log(notes[nextNote].chord + " " + songTime);
 
             nextNote++;
         }

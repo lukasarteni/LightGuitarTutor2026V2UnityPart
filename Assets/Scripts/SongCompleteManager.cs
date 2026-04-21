@@ -14,7 +14,9 @@ public class SongCompleteManager : MonoBehaviour
     [Tooltip("The AudioSource playing the song. If left null, the script will search the scene.")]
     public AudioSource musicSource;
 
-    [Tooltip("Reference to the pause manager GameObject so we can disable pausing when the song ends.")]
+    [Tooltip(
+        "Reference to the pause manager GameObject so we can disable pausing when the song ends."
+    )]
     public MonoBehaviour pauseManagerComponent;
 
     [Tooltip("Reference to the GameHudManager to read final stats.")]
@@ -87,9 +89,11 @@ public class SongCompleteManager : MonoBehaviour
 
     private void Update()
     {
-        if (_songCompleted) return;
+        if (_songCompleted)
+            return;
 
-        if (musicSource == null) return;
+        if (musicSource == null)
+            return;
 
         // Track whether the song has started playing
         if (musicSource.isPlaying)
@@ -106,7 +110,8 @@ public class SongCompleteManager : MonoBehaviour
             {
                 float timeRemaining = musicSource.clip.length - musicSource.time;
                 // If less than 1 second remaining or time has reset to 0, song is done
-                if (timeRemaining < 1f || musicSource.time < 0.1f)
+                //if (timeRemaining < 1f || musicSource.time < 0.1f)
+                if (timeRemaining < 1f)
                 {
                     OnSongComplete();
                 }
