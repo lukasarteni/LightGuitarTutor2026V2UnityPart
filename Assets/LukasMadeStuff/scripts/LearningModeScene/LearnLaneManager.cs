@@ -57,7 +57,7 @@ public class TestLaneManager : MonoBehaviour
         double timeUntilHit = note.time - songTime;
 
         double xOffset = timeUntilHit * scrollSpeed;
-
+        //Debug.Log(note.chord + ", " + songTime + ", " + (scoringPlank.position.x + (float)xOffset));
         Vector3 spawnPos = new Vector3(scoringPlank.position.x + (float)xOffset, fixedY, fixedZ);
         GameObject obj;
         if (prefab == null)

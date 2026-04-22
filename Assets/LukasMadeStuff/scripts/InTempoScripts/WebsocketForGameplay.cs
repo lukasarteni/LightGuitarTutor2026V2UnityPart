@@ -38,7 +38,7 @@ public class WebsocketForGameplay : MonoBehaviour
             string chord = rawMessage;
 
             // Validate before sending
-            if (chord!= null) 
+            if (chord != null)
                 hitManager.TryHit(chord);
             else
             {
