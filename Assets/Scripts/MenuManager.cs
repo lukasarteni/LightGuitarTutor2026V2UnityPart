@@ -328,6 +328,15 @@ public class MenuManager : MonoBehaviour
 
         Debug.Log($"Playing {song.songName} by {song.artist}. Length: {song.duration}, Difficulty: {song.difficulty}");
 
+        // 1) If the song has a hardcoded scene name, use it directly.
+        if (!string.IsNullOrEmpty(song.sceneName))
+        {
+            Debug.Log($"MenuManager: Loading song-specific scene '{song.sceneName}'");
+            SceneManager.LoadScene(song.sceneName);
+            return;
+        }
+
+        // 2) Fallback: pick scene based on the selected game mode.
         var mode = GameManager.Instance.selectedMode;
         switch (mode)
         {
@@ -338,7 +347,7 @@ public class MenuManager : MonoBehaviour
                 SceneManager.LoadScene("InTempoScene");
                 break;
             default:
-                Debug.LogWarning($"MenuManager: No scene mapping for mode '{mode}'.");
+                Debug.LogWarning($"MenuManager: No scene mapping for mode '{mode}' and song has no sceneName set.");
                 break;
         }
     }
