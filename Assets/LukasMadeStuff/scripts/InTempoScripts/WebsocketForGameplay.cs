@@ -34,12 +34,13 @@ public class WebsocketForGameplay : MonoBehaviour
 
             Debug.Log("Received from Python: " + rawMessage);
 
-            // Normalize input (important!)
-            string chord = rawMessage;
+            // Convert incoming message into normalized chord
+            string chord = ConvertToChord(rawMessage);
 
-            // Validate before sending
             if (chord != null)
+            {
                 hitManager.TryHit(chord);
+            }
             else
             {
                 Debug.LogWarning("Invalid chord received: " + rawMessage);
@@ -68,8 +69,6 @@ public class WebsocketForGameplay : MonoBehaviour
 #endif
     }
 
-    // methods
-
     public async void SendData(string message)
     {
         if (websocket != null && websocket.State == WebSocketState.Open)
@@ -88,6 +87,36 @@ public class WebsocketForGameplay : MonoBehaviour
         if (websocket != null)
         {
             await websocket.Close();
+        }
+    }
+
+    // -------------------------
+    // Chord Conversion Logic
+    // -------------------------
+    private string ConvertToChord(string rawMessage)
+    {
+        if (string.IsNullOrWhiteSpace(rawMessage))
+            return null;
+
+        string[] parts = rawMessage.Split(':');
+
+        // Expect format like "A:min" or "C:maj"
+        if (parts.Length != 2)
+            return null;
+
+        string root = parts[0].Trim();
+        string quality = parts[1].Trim().ToLower();
+
+        switch (quality)
+        {
+            case "min":
+                return root + "m";
+
+            case "maj":
+                return root;
+
+            default:
+                return null; // reject unknown types
         }
     }
 }

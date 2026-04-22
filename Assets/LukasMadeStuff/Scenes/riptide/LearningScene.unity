@@ -3019,7 +3019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb62090e84316b4da673791b38588fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LearnChartGeneratorFromTxt
-  chordFile: {fileID: 4900000, guid: 36e4f670f446acc4d8510a212ae2e1f3, type: 3}
+  chordFile: {fileID: 4900000, guid: 61add146e4279e841885d4ed636f82a5, type: 3}
   CountInTime: 0
 --- !u!4 &1762023032
 Transform:
@@ -3485,7 +3485,7 @@ PrefabInstance:
     - target: {fileID: 2898043484487366147, guid: 4b0e7453c61f6bb4c86872676989f5f2, type: 3}
       propertyPath: m_Resource
       value: 
-      objectReference: {fileID: 8300000, guid: 0ec26329d0cd26244803ae42d782d001, type: 3}
+      objectReference: {fileID: 8300000, guid: 0202ee182353dfb48b5172acd814f5d6, type: 3}
     - target: {fileID: 2898043484487366147, guid: 4b0e7453c61f6bb4c86872676989f5f2, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
